@@ -5,7 +5,6 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import chatbotRoutes from "./routes/chatbot.route.js";
 import cookieParser from "cookie-parser";
-import predictionRoutes from "./routes/prediction.route.js";
 import riskcalculateRoutes from "./routes/riskCalculator.route.js"
 import cropReccomender from "./routes/cropRecommender.route.js"
 import path from 'path';
@@ -26,7 +25,6 @@ const __dirname  = path.dirname(__filename);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/ai", chatbotRoutes);
-app.use("/api/predictions", predictionRoutes);
 app.use("/api/calculate", riskcalculateRoutes);
 app.use("/api/reccomender", cropReccomender);
 
