@@ -2,8 +2,8 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config index.js",
     "start": "node index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "postinstall": "npm --prefix frontend install && npm --prefix frontend run build"
+    "build": "npm install && npm install --prefix ../frontend && npm run build --prefix ../frontend",
+    "postinstall": "npm --prefix ../frontend install && npm --prefix ../frontend run build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
