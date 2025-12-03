@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "nodemon -r dotenv/config index.js",
-    "start": "node api/index.js",
+    "start": "node index.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client",
     "postinstall": "npm --prefix client install && npm --prefix client run build"
   },

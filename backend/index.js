@@ -8,12 +8,18 @@ import cookieParser from "cookie-parser";
 import predictionRoutes from "./routes/prediction.route.js";
 import riskcalculateRoutes from "./routes/riskCalculator.route.js"
 import cropReccomender from "./routes/cropRecommender.route.js"
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser()); 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);  
 
 
 app.use("/api/user", userRoutes);
@@ -23,6 +29,20 @@ app.use("/api/predictions", predictionRoutes);
 app.use("/api/calculate", riskcalculateRoutes);
 app.use("/api/reccomender", cropReccomender);
 
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+
+app.get(/^\/(?!api\/).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
+
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(statusCode).json({ success: false, message, statusCode });
+});
 
 
 const PORT = process.env.PORT || 3000;
