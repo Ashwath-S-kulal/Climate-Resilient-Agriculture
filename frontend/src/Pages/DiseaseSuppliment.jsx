@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { FiChevronDown, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { FaChevronDown, FaFilter, FaSyringe } from "react-icons/fa";
 import Header from "../Components/Header";
+import axios from "axios";
 
 export default function CsvReader() {
   const [csvData, setCsvData] = useState([]);
@@ -11,7 +12,7 @@ export default function CsvReader() {
 
   // 🔥 Fetch data from BACKEND instead of CSV
   useEffect(() => {
-    fetch("https://climate-resilient-agriculture.onrender.com/api/supplements/supplimentdata")
+    axios.get("/api/supplements/supplimentdata")
       .then((res) => res.json())
       .then((result) => {
         setAllData(result.data);

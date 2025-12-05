@@ -8,6 +8,7 @@ import Papa from "papaparse";
 import Header from "../Components/Header";
 import { useState, useEffect } from "react";
 import ChatbotIcon from "../Components/ChatbotIcon";
+import axios from "axios";
 
 const keyDataIcons = {
   "Ideal pH": FaFlask,
@@ -43,7 +44,6 @@ export default function CropSearchCSV() {
   const isErrorState = result?.error;
   const isDataState = result?.["Crop Name"];
 
-  // ✅ FIX — Convert object values to readable string
   const formatValue = (value) => {
     if (value === null || value === undefined) return "—";
     if (typeof value === "object") return Object.values(value).join(", ");
@@ -51,7 +51,7 @@ export default function CropSearchCSV() {
   };
 
   useEffect(() => {
-    fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
+    axios.get("/api/cropinfo/")
       .then((res) => res.json())
       .then((data) => {
         setCrops(data);
@@ -71,8 +71,8 @@ export default function CropSearchCSV() {
     if (!finalQuery) return;
 
     try {
-      const res = await fetch(
-        `https://climate-resilient-agriculture.onrender.com/api/cropinfo/${encodeURIComponent(finalQuery)}`
+      const res = await axios.get(
+        `/api/cropinfo/${encodeURIComponent(finalQuery)}`
       );
 
       if (!res.ok) {
