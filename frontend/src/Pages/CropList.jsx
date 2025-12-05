@@ -23,21 +23,13 @@ export default function CropsList() {
     const searchInputRef = useRef(null);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    useEffect(() => {
-        Papa.parse("../../public/data/Crop_Steps_Data.csv", {
-            download: true,
-            header: true,
-            dynamicTyping: true,
-            complete: ({ data }) => {
-                setCrops(
-                    data.filter((d) => d.id && d.name).map((d) => ({
-                        ...d,
-                        id: Number(d.id),
-                    }))
-                );
-            },
-        });
-    }, []);
+useEffect(() => {
+    fetch("/api/cropsteps")
+        .then((res) => res.json())
+        .then((data) => setCrops(data))
+        .catch((err) => console.log(err));
+}, []);
+
 
     const selectedCrop = useMemo(
         () => crops.find((c) => c.id === selectedCropId),

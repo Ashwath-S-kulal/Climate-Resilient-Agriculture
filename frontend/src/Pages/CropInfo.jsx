@@ -8,7 +8,6 @@ import Papa from "papaparse";
 import Header from "../Components/Header";
 import { useState, useEffect } from "react";
 import ChatbotIcon from "../Components/ChatbotIcon";
-import axios from "axios";
 
 const keyDataIcons = {
   "Ideal pH": FaFlask,
@@ -44,6 +43,7 @@ export default function CropSearchCSV() {
   const isErrorState = result?.error;
   const isDataState = result?.["Crop Name"];
 
+  // ✅ FIX — Convert object values to readable string
   const formatValue = (value) => {
     if (value === null || value === undefined) return "—";
     if (typeof value === "object") return Object.values(value).join(", ");
@@ -51,7 +51,7 @@ export default function CropSearchCSV() {
   };
 
   useEffect(() => {
-    axios.get("/api/cropinfo/")
+    fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
       .then((res) => res.json())
       .then((data) => {
         setCrops(data);
@@ -66,30 +66,29 @@ export default function CropSearchCSV() {
       });
   }, []);
 
-const handleSearch = async (query) => {
-  const finalQuery = query || search;
-  if (!finalQuery) return;
+  const handleSearch = async (query) => {
+    const finalQuery = query || search;
+    if (!finalQuery) return;
 
-  try {
-    const res = await axios.get(
-      `/api/cropinfo/${encodeURIComponent(finalQuery)}`
-    );
+    try {
+      const res = await fetch(
+        `https://climate-resilient-agriculture.onrender.com/api/cropinfo/${encodeURIComponent(finalQuery)}`
+      );
 
-    setResult(res.data);
-    setSuggestions([]);
-    setIsFocused(false);
+      if (!res.ok) {
+        setResult({ error: `No detailed information found for: ${finalQuery}` });
+        return;
+      }
 
-  } catch (err) {
-    console.error(err);
-
-    if (err.response?.status === 404) {
-      setResult({ error: `No detailed information found for: ${finalQuery}` });
-    } else {
+      const data = await res.json();
+      setResult(data);
+      setSuggestions([]);
+      setIsFocused(false);
+    } catch (err) {
+      console.log(err);
       setResult({ error: "Server error, please try again later." });
     }
-  }
-};
-
+  };
 
   useEffect(() => {
     if (!search || !isFocused) return setSuggestions([]);

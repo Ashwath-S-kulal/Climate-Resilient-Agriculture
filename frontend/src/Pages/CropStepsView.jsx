@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Papa from "papaparse";
 import { FiClipboard, FiZap } from "react-icons/fi";
 
 function CropStepsView({ crop }) {
@@ -7,32 +6,29 @@ function CropStepsView({ crop }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Papa.parse("../../public/data/Crop_Steps_Data.csv", {
-      download: true,
-      header: true,
-      complete: (result) => {
-        const rows = result.data;
-        const found = rows.find((row) => row.id === String(crop.id));
+    setLoading(true);
 
-        if (found) {
-          setPlan({
-            overview: found.overview,
-            steps: found.steps?.split("|") ?? [],
-          });
-        } else {
-          setPlan(null);
-        }
+    fetch(`/api/cropsteps/${crop.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPlan({
+          overview: data.overview,
+          steps: typeof data.steps === "string"
+            ? data.steps.split("|").map((s) => s.trim())
+            : data.steps
+        });
         setLoading(false);
-      },
-    });
+      })
+      .catch(() => setLoading(false));
   }, [crop.id]);
 
-  if (loading) return <p className="text-center mt-10 text-gray-600">Loading...</p>;
+  if (loading)
+    return <p className="text-center mt-10 text-gray-600">Loading...</p>;
 
   if (!plan)
     return (
       <p className="text-white italic text-center mt-10 p-2 rounded-lg bg-green-700/50 text-sm">
-        No growing data available for *{crop.name}* yet.
+        No growing data available for {crop.name} yet.
       </p>
     );
 
@@ -98,11 +94,11 @@ function CropStepsView({ crop }) {
           </div>
 
           <p className="text-center font-semibold text-amber-700 mt-3">
-             Happy Harvesting!
+            Happy Harvesting!
           </p>
 
           <p className="text-center text-sm text-amber-600 mt-1">
-            Enjoy the fruits or vegetables! of your labor. Time to replant!
+            Enjoy the fruits or vegetables of your labor. Time to replant!
           </p>
         </div>
       </div>
