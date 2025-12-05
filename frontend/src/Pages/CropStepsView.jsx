@@ -36,6 +36,13 @@ function CropStepsView({ crop }) {
 
   return (
     <div className="w-full h-full bg-[#F0FAF2] border border-green-200 rounded-2xl shadow-lg p-6 md:p-8">
+      <button
+        onClick={() => window.location.reload()}
+        className="text-blue-600 italic text-sm flex items-end justify-self-end mb-3"
+      >
+        Refresh
+      </button>
+
       <div className="flex flex-col md:flex-row gap-6 mb-10 items-start bg-white/70 backdrop-blur-lg p-6 rounded-3xl border border-green-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
         <div className="relative w-36 h-full md:w-40 md:h-full rounded-3xl overflow-hidden shadow-inner border border-green-300 flex items-center justify-center">
           {crop.image ? (

@@ -66,7 +66,7 @@ export default function Weather() {
 
   // --- Current Location ---
   const getCurrentLocation = () => {
-    setLoading(true); setError("");
+    setLoading(true); 
     if (!navigator.geolocation) {
       setError("Geolocation not supported");
       setLoading(false); setLocationName("Please search for a city.");
@@ -139,6 +139,7 @@ export default function Weather() {
   // --- Weather & History (unchanged) ---
   const getWeather = async (lat, lon) => {
     try {
+      setLoading(true);
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
         `&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m` +
         `&daily=temperature_2m_max,temperature_2m_min,weather_code` +
@@ -148,7 +149,9 @@ export default function Weather() {
       setToday({ temp: data.current.temperature_2m, humidity: data.current.relative_humidity_2m, wind: data.current.wind_speed_10m, weather_code: data.current.weather_code });
       const d = data.daily.time.map((t, i) => ({ date: t, temp_max: data.daily.temperature_2m_max[i], temp_min: data.daily.temperature_2m_min[i], weather_code: data.daily.weather_code[i] }));
       setForecast(d.slice(1, 8));
+      setLoading(false);
     } catch (e) { setError("Failed to fetch current weather."); console.error(e); }
+    finally { setLoading(false); }
   };
 
   const getHistory = async (lat, lon) => {
@@ -165,6 +168,7 @@ export default function Weather() {
       const arr = data.daily.time.map((t, i) => ({ date: t, temp_max: data.daily.temperature_2m_max[i], temp_min: data.daily.temperature_2m_min[i], rain: data.daily.precipitation_sum[i], wind: data.daily.wind_speed_10m_max[i], weather_code: data.daily.weather_code[i] }));
       setHistory(arr.reverse());
     } catch (e) { console.log("Failed to fetch history.", e); }
+    finally {setLoading(false); }
   };
 
   const todayDate = today ? new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : null;

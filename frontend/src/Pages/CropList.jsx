@@ -231,7 +231,6 @@ export default function CropsList() {
                 }}
             >
                 <div className="absolute inset-0 bg-gray-950/80 backdrop-blur backdrop-layer"></div>
-
                 <div
                     className={`absolute bottom-0 left-0 right-0 w-full lg:max-w-4xl max-h-screen lg:max-h-[calc(100vh-80px)] mx-auto 
                         bg-green-700 md:rounded-t-3xl 

@@ -168,9 +168,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] font-sans">
-
-
-      <header className="relative bg-gradient-to-br from-green-700 to-green-900 pt-10 pb-32 text-white shadow-2xl md:rounded-b-3xl">
+      <header className="relative bg-gradient-to-br from-green-700 to-green-900 pt-5 md:pt-10 pb-20 md:pb-32 text-white shadow-2xl md:rounded-b-3xl">
         <section >
           <WellcomeCard />
         </section>
@@ -241,46 +239,52 @@ export default function Home() {
           <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-4">
             Phase 3: The Knowledge Core
           </h2>
-          <p className="text-center text-base text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-center text-base text-gray-600 mb-6 md:mb-12 max-w-3xl mx-auto">
             The foundation of smart farming—a centralized, verifiable repository of agricultural data.
           </p>
-          <div className='flex gap-10'>
-            <div className="max-w-4xl mx-auto mb-7">
+          <div className="w-full px-4 md:px-8 lg:px-16 py-0 md:py-6">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               <NavLink
                 to={knowledgeFeature.navLink}
-                className={`flex flex-col md:flex-row items-center p-10 bg-white rounded-3xl shadow-2xl border-l-8 ${knowledgeClasses.border} focus:outline-none focus:ring-4 ${knowledgeClasses.ring}`}
+                className={`flex flex-col md:flex-row items-center p-8 bg-white rounded-3xl shadow-2xl border-l-8 ${knowledgeClasses.border} focus:outline-none focus:ring-4 ${knowledgeClasses.ring}`}
               >
                 <div className={`p-5 rounded-full ${knowledgeClasses.bg} text-white flex-shrink-0 mb-6 md:mb-0 md:mr-6`}>
                   <KnowledgeIcon />
                 </div>
-                <div className="text-center md:text-left mr-10">
+
+                <div className="text-center md:text-left flex-1">
                   <h3 className="text-xl font-bold text-gray-800">{knowledgeFeature.title}</h3>
                   <p className="mt-3 text-sm text-gray-600">{knowledgeFeature.description}</p>
                 </div>
+
                 <span className={`mt-4 md:mt-0 md:ml-auto text-sm font-bold ${knowledgeClasses.text} flex-shrink-0`}>
-                  Access Data &rarr;
+                  Access Data →
                 </span>
               </NavLink>
-            </div>
 
-            <div className="max-w-4xl mx-auto">
               <NavLink
                 to="/croplibrary"
-                className={`flex flex-col md:flex-row items-center p-10 bg-white rounded-3xl shadow-2xl border-l-8 ${knowledgeClasses.border} focus:outline-none focus:ring-4 ${knowledgeClasses.ring}`}
+                className={`flex flex-col md:flex-row items-center p-8 bg-white rounded-3xl shadow-2xl border-l-8 ${knowledgeClasses.border} focus:outline-none focus:ring-4 ${knowledgeClasses.ring}`}
               >
                 <div className={`p-5 rounded-full ${knowledgeClasses.bg} text-white flex-shrink-0 mb-6 md:mb-0 md:mr-6`}>
                   <KnowledgeIcon />
                 </div>
-                <div className="text-center md:text-left mr-10">
+
+                <div className="text-center md:text-left flex-1">
                   <h3 className="text-xl font-bold text-gray-800">Resilience Tips and Tricks</h3>
-                  <p className="mt-3 text-sm text-gray-600">A deeply detailed guide , linking each principle directly to its foundational source and essential reading for sustainable farming.</p>
+                  <p className="mt-3 text-sm text-gray-600">
+                    A deeply detailed guide linking each principle directly to its foundational source and essential reading for sustainable farming.
+                  </p>
                 </div>
                 <span className={`mt-4 md:mt-0 md:ml-auto text-sm font-bold ${knowledgeClasses.text} flex-shrink-0`}>
-                  Access Data &rarr;
+                  Access Data →
                 </span>
               </NavLink>
+
             </div>
           </div>
+
         </section>
 
         <section className="bg-green-800 text-white p-10 sm:p-16 rounded-2xl shadow-2xl mb-20">
