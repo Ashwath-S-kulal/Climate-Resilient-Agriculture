@@ -6,7 +6,7 @@ import {
 import { FiSearch } from "react-icons/fi";
 import Papa from "papaparse";
 import Header from "../Components/Header";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import ChatbotIcon from "../Components/ChatbotIcon";
 
 const keyDataIcons = {
@@ -43,44 +43,52 @@ export default function CropSearchCSV() {
   const isErrorState = result?.error;
   const isDataState = result?.["Crop Name"];
 
-  useEffect(() => {
-    Papa.parse("../../public/data/Crop_Info_Data.csv", {
-      header: true,
-      download: true,
-      skipEmptyLines: true,
-      complete: ({ data, meta }) => {
-        const validData = data.filter((row) => row["Crop Name"]?.trim() !== "");
-        setCrops(validData);
+  // ✅ FIX — Convert object values to readable string
+  const formatValue = (value) => {
+    if (value === null || value === undefined) return "—";
+    if (typeof value === "object") return Object.values(value).join(", ");
+    return value;
+  };
 
-        if (meta?.fields) {
-          const filteredHeaders = meta.fields.filter(
-            (key) => key !== "Crop Name" && key !== "Image Description"
+  useEffect(() => {
+    fetch("/api/cropinfo/")
+      .then((res) => res.json())
+      .then((data) => {
+        setCrops(data);
+
+        if (data.length > 0) {
+          const headers = Object.keys(data[0]).filter(
+            (key) => key !== "_id" && key !== "__v" && key !== "Crop_Name"
           );
-          setHeaders(filteredHeaders);
+          setHeaders(headers);
           if (!result) setResult({ initial: true });
         }
-      },
-    });
-  }, [result]);
+      });
+  }, []);
 
-  const handleSearch = useCallback(
-    (query) => {
-      const finalQuery = query || search;
-      if (!finalQuery) return;
+  const handleSearch = async (query) => {
+    const finalQuery = query || search;
+    if (!finalQuery) return;
 
-      const foundCrop = crops.find(
-        (item) =>
-          item["Crop Name"]?.toLowerCase().trim() ===
-          finalQuery.toLowerCase().trim()
+    try {
+      const res = await fetch(
+        `http://localhost:5173/api/cropinfo/${encodeURIComponent(finalQuery)}`
       );
 
-      setSearch(finalQuery);
-      setResult(foundCrop || { error: `No detailed information found for: ${finalQuery}` });
+      if (!res.ok) {
+        setResult({ error: `No detailed information found for: ${finalQuery}` });
+        return;
+      }
+
+      const data = await res.json();
+      setResult(data);
       setSuggestions([]);
       setIsFocused(false);
-    },
-    [crops, search]
-  );
+    } catch (err) {
+      console.log(err);
+      setResult({ error: "Server error, please try again later." });
+    }
+  };
 
   useEffect(() => {
     if (!search || !isFocused) return setSuggestions([]);
@@ -126,6 +134,7 @@ export default function CropSearchCSV() {
         {(isInitialState || isDataState) && (
           <div className="max-w-6xl mx-auto bg-white/80 backdrop-blur-xl border border-green-200 rounded-3xl shadow-xl p-4 md:p-8 space-y-10">
 
+            {/* --- Search area --- */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-green-200 pb-4">
               <div className="flex items-center gap-3">
                 <div className="bg-lime-100 p-3 rounded-full shadow-inner">
@@ -136,7 +145,7 @@ export default function CropSearchCSV() {
                 </h2>
               </div>
 
-
+              {/* Search Bar */}
               <div className="w-full max-w-lg md:max-w-md relative mt-4 md:mt-0">
                 <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-600 text-lg" />
                 <input
@@ -155,6 +164,7 @@ export default function CropSearchCSV() {
                 >
                   Search
                 </button>
+
                 {suggestions.length > 0 && isFocused && (
                   <ul className="absolute left-0 top-full mt-2 w-full bg-white border border-green-200 rounded-xl shadow-lg overflow-hidden max-h-48 overflow-y-auto z-30">
                     {suggestions.map((s, i) => (
@@ -172,13 +182,14 @@ export default function CropSearchCSV() {
 
             </div>
 
+            {/* --- Summary Stats --- */}
             <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {headers
                 .filter((key) => keyStatHeaders.includes(key))
                 .map((key) => {
                   const formatted = formatKeyName(key);
                   const Icon = keyDataIcons[formatted] || FaLeaf;
-                  const value = isDataState ? result[key] : (
+                  const rawValue = isDataState ? result[key] : (
                     <span className="text-gray-500 italic text-sm">Search a crop to see output</span>
                   );
 
@@ -191,12 +202,17 @@ export default function CropSearchCSV() {
                         <Icon className="text-green-700 w-7 h-7" />
                       </div>
                       <h4 className="text-sm font-semibold text-green-700 uppercase">{formatted}</h4>
-                      <p className="text-base font-bold text-green-900 mt-1">{value}</p>
+                      
+                      {/* 🔧 FIX applied */}
+                      <p className="text-base font-bold text-green-900 mt-1">
+                        {isDataState ? formatValue(rawValue) : rawValue}
+                      </p>
                     </div>
                   );
                 })}
             </section>
 
+            {/* --- Detailed Table --- */}
             <section>
               <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2 pt-10">
                 Detailed Cultivation Data
@@ -206,29 +222,31 @@ export default function CropSearchCSV() {
                 <table className="min-w-full text-sm md:text-base text-green-900 table-fixed">
                   <thead className="bg-green-100">
                     <tr>
-                      <th className="text-left px-4 py-3 font-semibold text-green-700 uppercase w-1/3">Parameter</th>
-                      <th className="text-left px-4 py-3 font-semibold text-green-700 uppercase w-2/3">Value</th>
+                      <th className="text-left px-4 py-3 font-semibold text-green-700 uppercase w-1/3">
+                        Parameter
+                      </th>
+                      <th className="text-left px-4 py-3 font-semibold text-green-700 uppercase w-2/3">
+                        Value
+                      </th>
                     </tr>
                   </thead>
 
                   <tbody>
                     {headers
-                      .filter((key) => ![
-                        "Crop Name",
-                        "Image Description",
-                        ...keyStatHeaders,
-                      ].includes(key))
+                      .filter(
+                        (key) =>
+                          !["Crop Name", "Image Description", ...keyStatHeaders].includes(key)
+                      )
                       .map((key, i) => {
                         const formatted = formatKeyName(key);
-                        const value = isDataState ? result[key] : (
-                          <span className="text-gray-500 italic text-sm">Search a crop to see output</span>
-                        );
+                        const rawValue = isDataState ? result[key] : "—";
 
                         return (
                           <tr
                             key={key}
-                            className={`border-b border-green-100 ${i % 2 === 0 ? "bg-green-50" : "bg-lime-50"
-                              } hover:bg-green-100 transition`}
+                            className={`border-b border-green-100 ${
+                              i % 2 === 0 ? "bg-green-50" : "bg-lime-50"
+                            } hover:bg-green-100 transition`}
                           >
                             <td className="px-4 py-4 font-semibold text-green-800 align-top">
                               <div className="flex items-start gap-2">
@@ -238,7 +256,12 @@ export default function CropSearchCSV() {
                             </td>
 
                             <td className="px-4 py-4 text-green-700 font-medium align-top">
-                              <div className="min-h-[2.5rem] flex items-start">{value || "—"}</div>
+                              <div className="min-h-[2.5rem] flex items-start">
+                                
+                                {/* 🔧 FIX applied */}
+                                {formatValue(rawValue)}
+
+                              </div>
                             </td>
                           </tr>
                         );

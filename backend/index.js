@@ -7,9 +7,10 @@ import chatbotRoutes from "./routes/chatbot.route.js";
 import cookieParser from "cookie-parser";
 import riskcalculateRoutes from "./routes/riskCalculator.route.js"
 import cropReccomender from "./routes/cropRecommender.route.js"
+import supplementRoutes from "./routes/supplement.routes.js";
+import cropInfoRoutes from "./routes/cropInfo.route.js"
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 
 
 dotenv.config();
@@ -27,6 +28,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/ai", chatbotRoutes);
 app.use("/api/calculate", riskcalculateRoutes);
 app.use("/api/reccomender", cropReccomender);
+app.use("/api/supplements", supplementRoutes);
+app.use("/api/cropinfo", cropInfoRoutes);
+
+
 
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')));

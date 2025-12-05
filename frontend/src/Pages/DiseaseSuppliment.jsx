@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Papa from "papaparse";
 import { FiChevronDown, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { FaChevronDown, FaFilter, FaSyringe } from "react-icons/fa";
 import Header from "../Components/Header";
@@ -10,31 +9,15 @@ export default function CsvReader() {
   const [selectedDisease, setSelectedDisease] = useState("");
   const [allData, setAllData] = useState([]);
 
+  // 🔥 Fetch data from BACKEND instead of CSV
   useEffect(() => {
-    fetch("../../public/data/supplement_info.csv")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.text();
+    fetch("http://localhost:5173/api/supplements/supplimentdata")
+      .then((res) => res.json())
+      .then((result) => {
+        setAllData(result.data);
+        setCsvData(result.data);
       })
-      .then((csv) => {
-        Papa.parse(csv, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (results) => {
-            const parsedData = results.data.map(row => ({
-              ...row,
-              disease_name: row.disease_name && row.disease_name.trim() !== ""
-                ? row.disease_name.trim()
-                : "General Wellness"
-            }));
-            setAllData(parsedData);
-            setCsvData(parsedData);
-          },
-        });
-      })
-      .catch((error) => console.error("Error loading CSV:", error));
+      .catch((error) => console.error("API Error:", error));
   }, []);
 
   const handleFilterChange = (event) => {
@@ -44,17 +27,14 @@ export default function CsvReader() {
     if (disease === "") {
       setCsvData(allData);
     } else {
-      const filteredData = allData.filter(
-        (row) => row.disease_name === disease
-      );
-      setCsvData(filteredData);
+      const filtered = allData.filter((row) => row.disease_name === disease);
+      setCsvData(filtered);
     }
     setExpandedRow(null);
   };
 
-
   const uniqueDiseases = useMemo(() => {
-    const diseases = allData.map(row => row.disease_name);
+    const diseases = allData.map((row) => row.disease_name);
     return [...new Set(diseases)].sort();
   }, [allData]);
 
@@ -197,10 +177,6 @@ export default function CsvReader() {
                                 <p>
                                   <strong className="text-teal-700">Disease Targeted:</strong>{" "}
                                   {row.disease_name}
-                                </p>
-                                <p>
-                                  <strong className="text-teal-700">Product ID:</strong>{" "}
-                                  {row.index || "N/A"}
                                 </p>
                               </div>
 
