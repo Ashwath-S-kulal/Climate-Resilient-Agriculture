@@ -66,29 +66,30 @@ export default function CropSearchCSV() {
       });
   }, []);
 
-  const handleSearch = async (query) => {
-    const finalQuery = query || search;
-    if (!finalQuery) return;
+const handleSearch = async (query) => {
+  const finalQuery = query || search;
+  if (!finalQuery) return;
 
-    try {
-      const res = await axios.get(
-        `/api/cropinfo/${encodeURIComponent(finalQuery)}`
-      );
+  try {
+    const res = await axios.get(
+      `/api/cropinfo/${encodeURIComponent(finalQuery)}`
+    );
 
-      if (!res.ok) {
-        setResult({ error: `No detailed information found for: ${finalQuery}` });
-        return;
-      }
+    setResult(res.data);
+    setSuggestions([]);
+    setIsFocused(false);
 
-      const data = await res.json();
-      setResult(data);
-      setSuggestions([]);
-      setIsFocused(false);
-    } catch (err) {
-      console.log(err);
+  } catch (err) {
+    console.error(err);
+
+    if (err.response?.status === 404) {
+      setResult({ error: `No detailed information found for: ${finalQuery}` });
+    } else {
       setResult({ error: "Server error, please try again later." });
     }
-  };
+  }
+};
+
 
   useEffect(() => {
     if (!search || !isFocused) return setSuggestions([]);
