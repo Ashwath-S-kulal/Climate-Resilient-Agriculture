@@ -103,6 +103,10 @@ export default function Disease() {
   const [capturedImageFile, setCapturedImageFile] = useState(null);
   const { currentUser } = useSelector(state => state.user);
 
+  const handleClick = () => {
+    alert("Not supported");
+  };
+
 
 
   const fetchHistory = async () => {
@@ -136,22 +140,22 @@ export default function Disease() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    if (!image) 
+    if (!image)
       return alert("Please upload or capture an image!");
 
     const formData = new FormData();
     formData.append("image", image);
     try {
       const res = await axios.post('/api/predictions/predict', formData, {
-  headers: { "Content-Type": "multipart/form-data" },
-});
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
 
       const predictionResult = res.data;
       if (predictionResult.confidence < 0.15) {
-        setResult({ invalid: true });   
+        setResult({ invalid: true });
       } else {
-        setResult(predictionResult); 
+        setResult(predictionResult);
         await axios.post(`/api/predictions/createPrediction/${currentUser._id}`, predictionResult);
         fetchHistory();
       }
@@ -225,6 +229,7 @@ export default function Disease() {
         </div>
 
         <form
+          onClick={handleClick}
           onSubmit={handleSubmit}
           className=" bg-white  rounded-xl border border-gray-200 space-y-6 mx-8 pb-0 my-0"
         >
