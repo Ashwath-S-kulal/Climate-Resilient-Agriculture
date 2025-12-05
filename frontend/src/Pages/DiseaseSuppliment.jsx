@@ -11,7 +11,7 @@ export default function CsvReader() {
 
   // 🔥 Fetch data from BACKEND instead of CSV
   useEffect(() => {
-    fetch("/api/supplements/supplimentdata")
+    fetch("https://climate-resilient-agriculture.onrender.com/api/supplements/supplimentdata")
       .then((res) => res.json())
       .then((result) => {
         setAllData(result.data);

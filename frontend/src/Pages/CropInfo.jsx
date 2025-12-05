@@ -51,7 +51,7 @@ export default function CropSearchCSV() {
   };
 
   useEffect(() => {
-    fetch("/api/cropinfo/")
+    fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
       .then((res) => res.json())
       .then((data) => {
         setCrops(data);
@@ -72,7 +72,7 @@ export default function CropSearchCSV() {
 
     try {
       const res = await fetch(
-        `/api/cropinfo/${encodeURIComponent(finalQuery)}`
+        `https://climate-resilient-agriculture.onrender.com/api/cropinfo/${encodeURIComponent(finalQuery)}`
       );
 
       if (!res.ok) {
