@@ -10,6 +10,7 @@ import cropReccomender from "./routes/cropRecommender.route.js"
 import supplementRoutes from "./routes/supplement.routes.js";
 import cropInfoRoutes from "./routes/cropInfo.route.js"
 import cropStepRoutes from "./routes/cropStep.route.js";
+import cropdiseaseRoutes from "./routes/cropdisease.route.js"
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -32,6 +33,8 @@ app.use("/api/reccomender", cropReccomender);
 app.use("/api/supplements", supplementRoutes);
 app.use("/api/cropinfo", cropInfoRoutes);
 app.use("/api/cropsteps", cropStepRoutes);
+app.use("/api/cropdiseases", cropdiseaseRoutes);
+
 
 
 

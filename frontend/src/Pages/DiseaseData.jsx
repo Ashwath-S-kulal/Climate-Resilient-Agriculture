@@ -11,25 +11,20 @@ export default function CsvReader() {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("../../public/data/disease_info.csv")
-      .then((res) => res.text())
-      .then((csv) => {
-        Papa.parse(csv, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (results) => {
-            setCsvData(results.data);
-            setIsLoading(false);
-          },
-        });
-      })
-      .catch((error) => {
-        console.error("Error loading CSV:", error);
-        setIsLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  setIsLoading(true);
+  fetch("/api/cropdiseases") // your backend URL
+    .then(res => res.json())
+    .then(data => {
+      setCsvData(data);
+      setIsLoading(false);
+    })
+    .catch(error => {
+      console.error("Error fetching disease data:", error);
+      setIsLoading(false);
+    });
+}, []);
+
 
 
   const uniqueDiseaseNames = useMemo(() => {
