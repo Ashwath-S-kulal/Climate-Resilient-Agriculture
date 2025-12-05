@@ -19,16 +19,20 @@ export default function CropsList() {
     const [search, setSearch] = useState("");
     const [seasonFilter, setSeasonFilter] = useState("");
     const [selectedCropId, setSelectedCropId] = useState(null);
-
     const searchInputRef = useRef(null);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-useEffect(() => {
-    fetch("/api/cropsteps")
-        .then((res) => res.json())
-        .then((data) => setCrops(data))
-        .catch((err) => console.log(err));
-}, []);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch("/api/cropsteps")
+            .then(res => res.json())
+            .then(data => setCrops(data))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false));
+    }, []);
+
 
 
     const selectedCrop = useMemo(
@@ -84,7 +88,7 @@ useEffect(() => {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800">
-            
+
             <div className="bg-gradient-to-t from-green-800 to-green-600 text-white md:rounded-b-3xl">
                 <Header />
                 <div className="pt-24 pb-16 px-4 w-full max-w-7xl mx-auto">
@@ -96,11 +100,11 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
-            
-            <div className="px-4 w-full max-w-7xl mx-auto relative -top-9"> 
+
+
+            <div className="px-4 w-full max-w-7xl mx-auto relative -top-9">
                 <div className="sticky top-16 z-20 bg-white p-4 rounded-xl md:rounded-full shadow-2xl border border-lime-200 mb-8">
                     <div className="flex flex-wrap items-center gap-4">
-
                         <div className="relative flex-1 min-w-[200px]" ref={searchInputRef}>
                             <div className="flex items-center bg-lime-50 rounded-full px-4 py-2 gap-3 border border-green-300 focus-within:border-green-500 transition-colors">
                                 <FiSearch className="text-green-600 text-lg" />
@@ -117,7 +121,7 @@ useEffect(() => {
                                     onFocus={() => search.length >= 1 && setShowSuggestions(true)}
                                 />
                                 {search && (
-                                    <FiX className="text-green-400 cursor-pointer hover:text-red-500" onClick={() => setSearch('')}/>
+                                    <FiX className="text-green-400 cursor-pointer hover:text-red-500" onClick={() => setSearch('')} />
                                 )}
                             </div>
                             {showSuggestions && searchSuggestions.length > 0 && (
@@ -164,6 +168,14 @@ useEffect(() => {
                         </button>
                     </div>
                 </div>
+                {(loading) && (
+                    <div className="flex flex-col justify-center items-center py-12">
+                        <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-md font-medium text-green-600 mt-3">
+                            {"Loading Crop Database..."}
+                        </p>
+                    </div>
+                )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {filtered.map((c) => (
@@ -204,12 +216,7 @@ useEffect(() => {
                             </div>
                         </div>
                     ))}
-                    {filtered.length === 0 && (
-                        <div className="col-span-full p-10 text-center bg-white rounded-xl border border-red-300 shadow-xl">
-                            <h3 className="text-2xl font-bold text-red-500 mb-2">No Crops Matched</h3>
-                            <p className="text-gray-500">Adjust your search or reset the filters.</p>
-                        </div>
-                    )}
+
                 </div>
             </div>
 
@@ -252,7 +259,7 @@ useEffect(() => {
                     )}
                 </div>
             </div>
-            <ChatbotIcon/>
+            <ChatbotIcon />
         </div>
     );
 }

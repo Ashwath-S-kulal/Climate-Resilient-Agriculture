@@ -38,38 +38,48 @@ export default function CropSearchCSV() {
   const [result, setResult] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const isInitialState = result?.initial;
   const isErrorState = result?.error;
   const isDataState = result?.["Crop Name"];
 
-  // ✅ FIX — Convert object values to readable string
   const formatValue = (value) => {
     if (value === null || value === undefined) return "—";
     if (typeof value === "object") return Object.values(value).join(", ");
     return value;
   };
 
-  useEffect(() => {
-    fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
-      .then((res) => res.json())
-      .then((data) => {
-        setCrops(data);
+ useEffect(() => {
+  setLoading(true);
 
-        if (data.length > 0) {
-          const headers = Object.keys(data[0]).filter(
-            (key) => key !== "_id" && key !== "__v" && key !== "Crop_Name"
-          );
-          setHeaders(headers);
-          if (!result) setResult({ initial: true });
-        }
-      });
-  }, []);
+  fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
+    .then((res) => res.json())
+    .then((data) => {
+      setCrops(data);
+
+      if (data.length > 0) {
+        const headers = Object.keys(data[0]).filter(
+          (key) => key !== "_id" && key !== "__v" && key !== "Crop_Name"
+        );
+        setHeaders(headers);
+        setResult({ initial: true });
+      }
+
+      setLoading(false); 
+    })
+    .catch(() => {
+      setLoading(false); 
+    });
+}, []);
+
 
   const handleSearch = async (query) => {
     const finalQuery = query || search;
     if (!finalQuery) return;
 
+    setLoading(true);
     try {
       const res = await fetch(
         `https://climate-resilient-agriculture.onrender.com/api/cropinfo/${encodeURIComponent(finalQuery)}`
@@ -85,8 +95,12 @@ export default function CropSearchCSV() {
       setSuggestions([]);
       setIsFocused(false);
     } catch (err) {
+      setLoading(false);
       console.log(err);
       setResult({ error: "Server error, please try again later." });
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -130,10 +144,18 @@ export default function CropSearchCSV() {
         </div>
       </header>
 
+      {(loading) && (
+        <div className="flex flex-col justify-center items-center py-12">
+          <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-md font-medium text-green-600 mt-3">
+            {"Loading Crop Database..."}
+          </p>
+        </div>
+      )}
+      
       <main className="w-full px-2 md:px-10 pt-3 md:pt-5 pb-24 space-y-12">
         {(isInitialState || isDataState) && (
           <div className="max-w-6xl mx-auto bg-white/80 backdrop-blur-xl border border-green-200 rounded-3xl shadow-xl p-4 md:p-8 space-y-10">
-
             {/* --- Search area --- */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-green-200 pb-4">
               <div className="flex items-center gap-3">
@@ -202,7 +224,7 @@ export default function CropSearchCSV() {
                         <Icon className="text-green-700 w-7 h-7" />
                       </div>
                       <h4 className="text-sm font-semibold text-green-700 uppercase">{formatted}</h4>
-                      
+
                       {/* 🔧 FIX applied */}
                       <p className="text-base font-bold text-green-900 mt-1">
                         {isDataState ? formatValue(rawValue) : rawValue}
@@ -244,9 +266,8 @@ export default function CropSearchCSV() {
                         return (
                           <tr
                             key={key}
-                            className={`border-b border-green-100 ${
-                              i % 2 === 0 ? "bg-green-50" : "bg-lime-50"
-                            } hover:bg-green-100 transition`}
+                            className={`border-b border-green-100 ${i % 2 === 0 ? "bg-green-50" : "bg-lime-50"
+                              } hover:bg-green-100 transition`}
                           >
                             <td className="px-4 py-4 font-semibold text-green-800 align-top">
                               <div className="flex items-start gap-2">
@@ -257,7 +278,7 @@ export default function CropSearchCSV() {
 
                             <td className="px-4 py-4 text-green-700 font-medium align-top">
                               <div className="min-h-[2.5rem] flex items-start">
-                                
+
                                 {/* 🔧 FIX applied */}
                                 {formatValue(rawValue)}
 
