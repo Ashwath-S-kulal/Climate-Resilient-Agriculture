@@ -72,7 +72,7 @@ export default function CropSearchCSV() {
 
     try {
       const res = await fetch(
-        `http://localhost:5173/api/cropinfo/${encodeURIComponent(finalQuery)}`
+        `/api/cropinfo/${encodeURIComponent(finalQuery)}`
       );
 
       if (!res.ok) {

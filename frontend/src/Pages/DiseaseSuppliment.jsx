@@ -11,7 +11,7 @@ export default function CsvReader() {
 
   // 🔥 Fetch data from BACKEND instead of CSV
   useEffect(() => {
-    fetch("http://localhost:5173/api/supplements/supplimentdata")
+    fetch("/api/supplements/supplimentdata")
       .then((res) => res.json())
       .then((result) => {
         setAllData(result.data);
