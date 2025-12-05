@@ -83,8 +83,8 @@ export default function WelcomeHero() {
 
   return (
 
-    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl shadow-md p-4 m-4">
-      <div className="relative w-full h-[55vh] overflow-hidden  border border-green-200 rounded-xl">
+    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl shadow-md p-2 md:p-4 m-4">
+      <div className="relative w-full h-[40vh] md:h-[55vh] overflow-hidden  border border-green-200 rounded-xl">
         <div
           className="flex transition-transform duration-700 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
