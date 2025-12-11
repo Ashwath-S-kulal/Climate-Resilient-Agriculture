@@ -1,5 +1,6 @@
 [
   {
+    "num":1,
     "name": "Corn",
     "type": "Sweet Corn",
     "season": "Summer",
@@ -18,6 +19,7 @@
     ]
   },
   {
+    "num":2,
     "name": "Wheat",
     "type": "Winter Wheat",
     "season": "Winter",
@@ -36,6 +38,7 @@
     ]
   },
   {
+    "num":3,
     "name": "Tomatoes",
     "type": "Roma Tomatoes",
     "season": "Summer",
@@ -54,6 +57,7 @@
     ]
   },
   {
+    "num":4,
     "name": "Rice",
     "type": "Basmati",
     "season": "Monsoon",
@@ -71,6 +75,7 @@
     ]
   },
   {
+    "num":5,
     "name": "Potatoes",
     "type": "Russet",
     "season": "Winter",
@@ -88,6 +93,7 @@
     ]
   },
   {
+    "num":6,
     "name": "Soybeans",
     "type": "Edamame",
     "season": "Summer",
@@ -105,6 +111,7 @@
     ]
   },
   {
+    "num":7,
     "name": "Barley",
     "type": "Spring Barley",
     "season": "Spring",
@@ -122,6 +129,7 @@
     ]
   },
   {
+    "num":8,
     "name": "Carrots",
     "type": "Nantes",
     "season": "Winter",
@@ -139,6 +147,7 @@
     ]
   },
   {
+    "num":9,
     "name": "Onions",
     "type": "Red Onions",
     "season": "Winter",
@@ -156,6 +165,7 @@
     ]
   },
   {
+    "num":10,
     "name": "Lettuce",
     "type": "Iceberg",
     "season": "Spring",
@@ -173,6 +183,7 @@
     ]
   },
   {
+    "num":11,
     "name": "Cucumber",
     "type": "Slicing Cucumber",
     "season": "Summer",
@@ -189,6 +200,7 @@
     ]
   },
   {
+    "num":12,
     "name": "Spinach",
     "type": "Bloomsdale",
     "season": "Spring/Fall",
@@ -205,6 +217,7 @@
     ]
   },
   {
+    "num":13,
     "name": "Peppers",
     "type": "Bell Pepper",
     "season": "Summer",
@@ -221,6 +234,7 @@
     ]
   },
   {
+    "num":14,
     "name": "Oats",
     "type": "Common Oat",
     "season": "Spring",
@@ -237,6 +251,7 @@
     ]
   },
   {
+    "num":15,
     "name": "Garlic",
     "type": "Hardneck",
     "season": "Fall",
@@ -253,6 +268,7 @@
     ]
   },
   {
+    "num":16,
     "name": "Broccoli",
     "type": "Calabrese",
     "season": "Spring/Fall",
@@ -270,6 +286,7 @@
     ]
   },
   {
+    "num":17,
     "name": "Sweet Potato",
     "type": "Jewel",
     "season": "Summer",
@@ -286,6 +303,7 @@
     ]
   },
   {
+    "num":18,
     "name": "Lentils",
     "type": "Red Lentil",
     "season": "Spring",
@@ -302,6 +320,7 @@
     ]
   },
   {
+    "num":19,
     "name": "Blueberries",
     "type": "Highbush",
     "season": "Year-Round",
@@ -319,6 +338,7 @@
     ]
   },
   {
+    "num":20,
     "name": "Cabbage",
     "type": "Green Cabbage",
     "season": "Spring/Fall",
@@ -335,6 +355,7 @@
     ]
   },
   {
+    "num":21,
     "name": "Zucchini",
     "type": "Black Beauty",
     "season": "Summer",
@@ -351,6 +372,7 @@
     ]
   },
   {
+    "num":22,
     "name": "Cabbage",
     "type": "Savoy Cabbage",
     "season": "Spring/Fall",
@@ -367,6 +389,7 @@
     ]
   },
   {
+    "num":23,
     "name": "Sunflowers",
     "type": "Mammoth",
     "season": "Summer",
@@ -383,6 +406,7 @@
     ]
   },
   {
+    "num":24,
     "name": "Kidney Beans",
     "type": "Bush Bean",
     "season": "Summer",
@@ -399,6 +423,7 @@
     ]
   },
   {
+    "num":25,
     "name": "Beets",
     "type": "Detroit Dark Red",
     "season": "Spring/Fall",
@@ -415,6 +440,7 @@
     ]
   },
   {
+    "num":26,
     "name": "Sweet Pea",
     "type": "Shelling Pea",
     "season": "Spring",
@@ -431,6 +457,7 @@
     ]
   },
   {
+    "num":27,
     "name": "Pumpkin",
     "type": "Jack O'Lantern",
     "season": "Summer",
@@ -447,6 +474,7 @@
     ]
   },
   {
+    "num":28,
     "name": "Kale",
     "type": "Dino Kale",
     "season": "Spring/Fall",
@@ -463,6 +491,7 @@
     ]
   },
   {
+    "num":29,
     "name": "Leeks",
     "type": "American Flag",
     "season": "Spring/Winter",
@@ -479,6 +508,7 @@
     ]
   },
   {
+    "num":30,
     "name": "Mint",
     "type": "Peppermint",
     "season": "Spring/Fall",
@@ -496,6 +526,7 @@
     ]
   },
   {
+    "num":31,
     "name": "Eggplant",
     "type": "Black Beauty",
     "season": "Summer",
@@ -513,6 +544,7 @@
     ]
   },
   {
+    "num":32,
     "name": "Asparagus",
     "type": "Mary Washington",
     "season": "Spring",
@@ -529,6 +561,7 @@
     ]
   },
   {
+    "num":33,
     "name": "Hops",
     "type": "Cascade",
     "season": "Spring",
@@ -545,6 +578,7 @@
     ]
   },
   {
+    "num":34,
     "name": "Raspberries",
     "type": "Red Raspberry",
     "season": "Spring",
@@ -561,6 +595,7 @@
     ]
   },
   {
+    "num":35,
     "name": "Almonds",
     "type": "Nonpareil",
     "season": "Winter/Spring",
@@ -578,6 +613,7 @@
     ]
   },
   {
+    "num":36,
     "name": "Quinoa",
     "type": "White Quinoa",
     "season": "Spring",
@@ -595,6 +631,7 @@
     ]
   },
   {
+    "num":37,
     "name": "Celery",
     "type": "Utah 52-70",
     "season": "Spring/Fall",
@@ -611,6 +648,7 @@
     ]
   },
   {
+    "num":38,
     "name": "Chia",
     "type": "Salvia Hispanica",
     "season": "Summer",
@@ -627,6 +665,7 @@
     ]
   },
   {
+    "num":39,
     "name": "Rhubarb",
     "type": "Victoria",
     "season": "Spring",
@@ -643,6 +682,7 @@
     ]
   },
   {
+    "num":40,
     "name": "Flax",
     "type": "Linseed",
     "season": "Spring",
@@ -659,6 +699,7 @@
     ]
   },
   {
+    "num":41,
     "name": "Mustard",
     "type": "Leaf Mustard",
     "season": "Spring/Fall",
@@ -676,6 +717,7 @@
     ]
   },
   {
+    "num":42,
     "name": "Sorghum",
     "type": "Grain Sorghum",
     "season": "Summer",
@@ -692,6 +734,7 @@
     ]
   },
   {
+    "num":43,
     "name": "Peanuts",
     "type": "Spanish Peanut",
     "season": "Summer",
@@ -708,6 +751,7 @@
     ]
   },
   {
+    "num":44,
     "name": "Cranberry",
     "type": "American Cranberry",
     "season": "Spring",
@@ -724,6 +768,7 @@
     ]
   },
   {
+    "num":45,
     "name": "Kohlrabi",
     "type": "Purple Kohlrabi",
     "season": "Spring/Fall",
@@ -740,6 +785,7 @@
     ]
   },
   {
+    "num":46,
     "name": "Fennel",
     "type": "Florence Fennel",
     "season": "Spring/Summer",

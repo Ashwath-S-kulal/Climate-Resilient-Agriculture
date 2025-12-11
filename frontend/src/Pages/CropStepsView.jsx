@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { FiClipboard, FiZap } from "react-icons/fi";
 
-function CropStepsView({ crop }) {
+export default function CropStepsView({ crop }) {
   const [plan, setPlan] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!crop?.num) return;
+
     setLoading(true);
 
-    fetch(`/api/cropsteps/${crop.id}`)
-      .then((res) => res.json())
+    fetch(`/api/cropsteps/${crop.num}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch crop steps");
+        return res.json();
+      })
       .then((data) => {
         setPlan({
-          overview: data.overview,
-          steps: typeof data.steps === "string"
-            ? data.steps.split("|").map((s) => s.trim())
-            : data.steps
+          overview: data.overview || "",
+          steps: Array.isArray(data.steps) ? data.steps : []
         });
         setLoading(false);
       })
-      .catch(() => setLoading(false));
-  }, [crop.id]);
+      .catch((err) => {
+        console.error("Error loading crop steps:", err);
+        setPlan(null);
+        setLoading(false);
+      });
+  }, [crop?.num]);
 
   if (loading)
     return <p className="text-center mt-10 text-gray-600">Loading...</p>;
@@ -36,12 +43,6 @@ function CropStepsView({ crop }) {
 
   return (
     <div className="w-full h-full bg-[#F0FAF2] border border-green-200 rounded-2xl shadow-lg p-6 md:p-8">
-      <button
-        onClick={() => window.location.reload()}
-        className="text-blue-600 italic text-sm flex items-end justify-self-end mb-3"
-      >
-        Refresh
-      </button>
 
       <div className="flex flex-col md:flex-row gap-6 mb-10 items-start bg-white/70 backdrop-blur-lg p-6 rounded-3xl border border-green-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
         <div className="relative w-36 h-full md:w-40 md:h-full rounded-3xl overflow-hidden shadow-inner border border-green-300 flex items-center justify-center">
@@ -74,43 +75,36 @@ function CropStepsView({ crop }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-4 mb-4">
+
+      <div className="flex items-center gap-2 mb-4">
         <FiClipboard className="text-green-800 text-xl" />
         <h3 className="text-lg font-bold text-green-900">The Growth Journey</h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {steps.map((step, i) => (
           <div
             key={i}
             className="relative bg-green-50 border border-green-200 rounded-xl p-4 shadow-sm"
           >
-            <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shadow">
+            <div className="absolute -top-3 -left-3 w-8 h-8 bg-green-600 text-white flex items-center justify-center rounded-full">
               {i + 1}
             </div>
 
-            <p className="text-sm font-semibold text-gray-700 mt-4 leading-relaxed">
+            <p className="mt-4 text-sm font-semibold text-gray-700">
               {step}
             </p>
           </div>
         ))}
 
-        <div className="relative bg-amber-50 border border-amber-300 rounded-xl p-4 shadow-sm col-span-full">
-          <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center shadow">
-            <FiZap className="text-sm" />
-          </div>
-
-          <p className="text-center font-semibold text-amber-700 mt-3">
-            Happy Harvesting!
-          </p>
-
-          <p className="text-center text-sm text-amber-600 mt-1">
-            Enjoy the fruits or vegetables of your labor. Time to replant!
-          </p>
+        <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 col-span-full text-center">
+          <FiZap className="text-amber-600 text-xl mx-auto" />
+          <p className="font-semibold text-amber-700 mt-2">Happy Harvesting!</p>
+          <p className="text-sm text-amber-600">Enjoy your fresh crops</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default CropStepsView;
+
