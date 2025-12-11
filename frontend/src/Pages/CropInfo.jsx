@@ -28,7 +28,7 @@ const keyStatHeaders = [
   "Planting Season",
   "Typical Height (m)",
   "Yield (Tons/Hectare)",
-  "Optimal Temp. (°C)",
+  "Optimal Temp",
 ];
 
 export default function CropSearchCSV() {
@@ -54,7 +54,7 @@ export default function CropSearchCSV() {
  useEffect(() => {
   setLoading(true);
 
-  fetch("https://climate-resilient-agriculture.onrender.com/api/cropinfo/")
+  fetch("/api/cropinfo/")
     .then((res) => res.json())
     .then((data) => {
       setCrops(data);
@@ -82,7 +82,7 @@ export default function CropSearchCSV() {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://climate-resilient-agriculture.onrender.com/api/cropinfo/${encodeURIComponent(finalQuery)}`
+        `/api/cropinfo/${encodeURIComponent(finalQuery)}`
       );
 
       if (!res.ok) {
@@ -120,14 +120,19 @@ export default function CropSearchCSV() {
     if (e.key === "Enter") handleSearch(search);
   };
 
-  const handleSuggestionClick = (cropName) => handleSearch(cropName);
+  const handleSuggestionClick = (cropName) => {
+  setSearch(cropName); 
+  handleSearch(cropName);
+};
 
-  const formatKeyName = (key) => {
-    if (key === "Typical Height (m)") return "Typical Height";
-    if (key === "Yield (Tons/Hectare)") return "Yield";
-    if (key === "Optimal Temp. (°C)") return "Optimal Temperature";
-    return key.replace(/([A-Z])/g, " $1").replace(/^./, (x) => x.toUpperCase()).replace(/_/g, " ").trim();
-  };
+
+const formatKeyName = (key) => {
+  if (key === "Typical Height (m)") return "Typical Height";
+  if (key === "Yield (Tons/Hectare)") return "Yield";
+  if (key === "Planting Season") return "Planting Season";
+  if (key === "Optimal Temp" ) return "Optimal Temp";
+  return key.replace(/([A-Z])/g, " $1").replace(/^./, (x) => x.toUpperCase()).replace(/_/g, " ").trim();
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 flex flex-col items-center">
@@ -156,7 +161,6 @@ export default function CropSearchCSV() {
       <main className="w-full px-2 md:px-10 pt-3 md:pt-5 pb-24 space-y-12">
         {(isInitialState || isDataState) && (
           <div className="max-w-6xl mx-auto bg-white/80 backdrop-blur-xl border border-green-200 rounded-3xl shadow-xl p-4 md:p-8 space-y-10">
-            {/* --- Search area --- */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-green-200 pb-4">
               <div className="flex items-center gap-3">
                 <div className="bg-lime-100 p-3 rounded-full shadow-inner">
@@ -167,7 +171,6 @@ export default function CropSearchCSV() {
                 </h2>
               </div>
 
-              {/* Search Bar */}
               <div className="w-full max-w-lg md:max-w-md relative mt-4 md:mt-0">
                 <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-600 text-lg" />
                 <input
@@ -204,7 +207,6 @@ export default function CropSearchCSV() {
 
             </div>
 
-            {/* --- Summary Stats --- */}
             <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {headers
                 .filter((key) => keyStatHeaders.includes(key))
@@ -225,7 +227,6 @@ export default function CropSearchCSV() {
                       </div>
                       <h4 className="text-sm font-semibold text-green-700 uppercase">{formatted}</h4>
 
-                      {/* 🔧 FIX applied */}
                       <p className="text-base font-bold text-green-900 mt-1">
                         {isDataState ? formatValue(rawValue) : rawValue}
                       </p>
@@ -234,7 +235,7 @@ export default function CropSearchCSV() {
                 })}
             </section>
 
-            {/* --- Detailed Table --- */}
+
             <section>
               <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2 pt-10">
                 Detailed Cultivation Data
@@ -278,10 +279,7 @@ export default function CropSearchCSV() {
 
                             <td className="px-4 py-4 text-green-700 font-medium align-top">
                               <div className="min-h-[2.5rem] flex items-start">
-
-                                {/* 🔧 FIX applied */}
                                 {formatValue(rawValue)}
-
                               </div>
                             </td>
                           </tr>
@@ -294,7 +292,6 @@ export default function CropSearchCSV() {
 
           </div>
         )}
-
         {isErrorState && (
           <div className="max-w-3xl mx-auto bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-xl flex items-center gap-3 shadow-md">
             <FaExclamationTriangle className="text-red-600 w-5 h-5" />
@@ -302,7 +299,6 @@ export default function CropSearchCSV() {
           </div>
         )}
       </main>
-
       <ChatbotIcon />
     </div>
   );
