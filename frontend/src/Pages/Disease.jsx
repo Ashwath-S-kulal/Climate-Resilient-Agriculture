@@ -184,16 +184,16 @@ export default function Disease() {
   };
 
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this record?")) return;
-    try {
-      await axios.delete(`/api/predictions/deletePrediction/${id}`);
-      fetchHistory();
-    } catch (err) {
-      console.error("Error deleting prediction:", err);
-      alert("Failed to delete prediction.");
-    }
-  };
+  // const handleDelete = async (id) => {
+  //   if (!window.confirm("Are you sure you want to delete this record?")) return;
+  //   try {
+  //     await axios.delete(`/api/predictions/deletePrediction/${id}`);
+  //     fetchHistory();
+  //   } catch (err) {
+  //     console.error("Error deleting prediction:", err);
+  //     alert("Failed to delete prediction.");
+  //   }
+  // };
 
   const handleCaptureImage = (file) => {
     setCapturedImageFile(file);
@@ -218,15 +218,15 @@ export default function Disease() {
     setIsCameraActive(false);
   }
 
-  const handleClearHistory = async (userId) => {
-    if (!window.confirm("Are you sure you want to clear all prediction history?")) return;
-    try {
-      await axios.delete(`/api/predictions/clearPrediction/${userId}`);
-      fetchHistory();
-    } catch (err) {
-      console.error("Error clearing history:", err);
-    }
-  };
+  // const handleClearHistory = async (userId) => {
+  //   if (!window.confirm("Are you sure you want to clear all prediction history?")) return;
+  //   try {
+  //     await axios.delete(`/api/predictions/clearPrediction/${userId}`);
+  //     fetchHistory();
+  //   } catch (err) {
+  //     console.error("Error clearing history:", err);
+  //   }
+  // };
 
 
 
@@ -282,7 +282,8 @@ export default function Disease() {
                 ) : (
                   <button
                     type="button"
-                    onClick={() => fileInputRef.current.click()}
+                    // onClick={() => fileInputRef.current.click()}
+                    onClick={handleGlobalClick}
                     className="flex flex-col items-center justify-center h-full w-full p-2 text-gray-600 hover:text-emerald-600"
                   >
                     <svg
@@ -346,10 +347,11 @@ export default function Disease() {
                 ) : (
                   <button
                     type="button"
-                    onClick={() => {
-                      setUploadedImageFile(null);
-                      setIsCameraActive(true);
-                    }}
+                    // onClick={() => {
+                    //   setUploadedImageFile(null);
+                    //   setIsCameraActive(true);
+                    // }}
+                    onClick={handleGlobalClick}
                     className="flex flex-col items-center justify-center h-full w-full p-2 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg transition-all"
                   >
                     <svg
@@ -476,53 +478,54 @@ export default function Disease() {
             </NavLink>
           </div>
 
-
-          <div
-            className="mt-4 rounded-xl bg-gray-50 border-2 border-green-300 shadow-xl hover:shadow-green-400/50 transition-shadow duration-300"
-          >
-            <div className="bg-emerald-600 p-4 sticky top-0 z-10 rounded-t-xl flex justify-between items-center">
-              <h3 className="text-xl font-bold text-white">
+          <div className="mt-4 rounded-xl bg-gray-50 border-2 border-green-300 shadow-xl hover:shadow-green-400/50 transition-shadow duration-300">
+            <div className="bg-emerald-600 p-3 sm:p-4 sticky top-0 z-10 rounded-t-xl flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between sm:items-center">
+              <h3 className="text-lg sm:text-xl font-bold text-white text-center sm:text-left">
                 Your Prediction History
               </h3>
-              <div className="flex gap-2">
+
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <button
                   onClick={fetchHistory}
-                  className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-all shadow flex items-center gap-1"
+                  className="w-full sm:w-auto px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-all shadow flex justify-center items-center gap-1"
                 >
                   <RefreshCw size={16} />
                   Refresh History
                 </button>
+
                 <button
-                  onClick={() => handleClearHistory(currentUser._id)}
-                  className="px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-all shadow flex items-center gap-1"
+                  className="w-full sm:w-auto px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-all shadow flex justify-center items-center gap-1"
+                // onClick={() => handleClearHistory(currentUser._id)}
                 >
                   <Trash2 size={16} />
                   Clear history
                 </button>
               </div>
             </div>
-            <div className="p-4 sm:p-6 flex flex-col gap-4">
-              {(loading) && (
-                <div className="flex flex-col justify-center items-center py-12">
+
+            <div className="p-3 sm:p-4 md:p-6 flex flex-col gap-4">
+              {loading && (
+                <div className="flex flex-col justify-center items-center py-10 sm:py-12">
                   <div className="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-md font-medium text-green-600 mt-3">
+                  <p className="text-sm sm:text-md font-medium text-green-600 mt-3 text-center">
                     Refreshing history...
                   </p>
                 </div>
               )}
+
               {!loading && history.length > 0 ? (
                 history.map((h) => (
                   <div
                     key={h._id}
-                    className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all shadow-md flex flex-col gap-3"
+                    className="bg-white p-3 sm:p-4 sm:p-5 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all shadow-md flex flex-col gap-3"
                   >
-                    <p className="text-gray-800 font-bold break-words text-xs md:text-sm sm:text-base">
+                    <p className="text-gray-800 font-bold break-words text-xs sm:text-sm md:text-base">
                       Disease Name :
                       <span className="text-green-800 ml-1">{h.prediction}</span>
                     </p>
 
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs sm:text-sm text-gray-600 gap-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8">
+                    <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center text-xs sm:text-sm text-gray-600 gap-3">
+                      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-6">
                         <span>
                           <strong>Disease Confidence:</strong>{" "}
                           {(h.confidence * 100).toFixed(2)}%
@@ -533,9 +536,10 @@ export default function Disease() {
                           {new Date(h.date).toLocaleDateString()}
                         </span>
                       </div>
+
                       <button
-                        onClick={() => handleDelete(h._id)}
-                        className="text-red-600 hover:text-red-700 font-bold transition flex gap-1 items-center"
+                        className="self-start lg:self-auto text-red-600 hover:text-red-700 font-bold transition flex gap-1 items-center"
+                      // onClick={() => handleDelete(h._id)}
                       >
                         <Trash2 size={18} />
                         Delete
@@ -544,16 +548,16 @@ export default function Disease() {
                   </div>
                 ))
               ) : (
-                <div>
-                  {!loading && (
-                    <p className="text-gray-500 text-center mt-8 text-sm sm:text-base">
-                      No predictions yet.
-                    </p>
-                  )}
-                </div>
+                !loading && (
+                  <p className="text-gray-500 text-center mt-6 sm:mt-8 text-sm sm:text-base">
+                    No predictions yet.
+                  </p>
+                )
               )}
             </div>
           </div>
+
+
         </div>
       </div>
 
