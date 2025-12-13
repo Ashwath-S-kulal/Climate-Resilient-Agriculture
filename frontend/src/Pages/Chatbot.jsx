@@ -75,7 +75,7 @@ export default function Chatbot (){
           <div className="w-full max-w-[650px]">
 
             <div
-              className="flex-1 overflow-y-auto space-y-5 mb-6 max-h-[73vh] px-2 scrollbar-thin scrollbar-thumb-green-600/60 scrollbar-track-transparent"
+              className="flex-1 overflow-y-auto space-y-5 mb-6 max-h-[75vh] px-2 scrollbar-thin scrollbar-thumb-green-600/60 scrollbar-track-transparent"
             >
               {messages.map((msg, idx) => (
                 <div
