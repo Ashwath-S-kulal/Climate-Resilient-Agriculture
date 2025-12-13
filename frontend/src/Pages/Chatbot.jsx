@@ -75,7 +75,7 @@ export default function Chatbot (){
           <div className="w-full max-w-[650px]">
 
             <div
-              className="flex-1 overflow-y-auto space-y-5 mb-6 max-h-[70vh] px-2 scrollbar-thin scrollbar-thumb-green-600/60 scrollbar-track-transparent"
+              className="flex-1 overflow-y-auto space-y-5 mb-6 max-h-[73vh] px-2 scrollbar-thin scrollbar-thumb-green-600/60 scrollbar-track-transparent"
             >
               {messages.map((msg, idx) => (
                 <div
@@ -97,7 +97,6 @@ export default function Chatbot (){
                     />
                   )}
 
-                  {/* Chat Bubble */}
                   <div className="flex flex-col max-w-[75%]">
                     <div
                       className={`
@@ -122,10 +121,8 @@ export default function Chatbot (){
                 </div>
               ))}
 
-              {/* ✅ AI TYPING LOADER (ONLY WHEN loading === true) */}
               {loading && (
                 <div className="flex items-end gap-2">
-                  {/* Bot Avatar */}
                   <div
                     className="w-8 h-8 rounded-full border border-green-300 shadow 
           bg-white flex items-center justify-center"
@@ -133,7 +130,6 @@ export default function Chatbot (){
                     <FaRobot size={18} className="text-green-700" />
                   </div>
 
-                  {/* Typing Bubble */}
                   <div
                     className="px-4 py-2.5 rounded-2xl shadow-md backdrop-blur-xl border text-sm
           bg-white/70 text-black border-green-200 rounded-bl-none"
