@@ -84,31 +84,31 @@ export default function ProfilePage() {
 
       {/* AURORA BACKDROP */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[60%] h-[40vh] bg-green-300/20 blur-3xl rounded-full animate-pulse"></div>
-        <div className="absolute bottom-10 right-1/3 w-[50%] h-[40vh] bg-teal-400/20 blur-3xl rounded-full animate-pulse delay-300"></div>
-        <div className="absolute top-1/3 right-0 w-[40%] h-[40vh] bg-yellow-400/20 blur-3xl rounded-full animate-pulse delay-700"></div>
+        <div className="absolute top-0 left-1/4 w-[80%] sm:w-[60%] h-[35vh] bg-green-300/20 blur-3xl rounded-full animate-pulse"></div>
+        <div className="absolute bottom-10 right-1/3 w-[70%] sm:w-[50%] h-[35vh] bg-teal-400/20 blur-3xl rounded-full animate-pulse delay-300"></div>
+        <div className="absolute top-1/3 right-0 w-[60%] sm:w-[40%] h-[35vh] bg-yellow-400/20 blur-3xl rounded-full animate-pulse delay-700"></div>
       </div>
 
       {/* CONTENT WRAPPER */}
-      <div className="relative w-full max-w-6xl mx-auto pt-20 pb-14 px-6">
+      <div className="relative w-full max-w-6xl mx-auto pt-20 pb-14 px-4 sm:px-6">
 
         {/* TOP ACTION ROW */}
-        <div className="flex items-center justify-between mb-10">
-          <h1 className="text-4xl font-extrabold tracking-wide bg-gradient-to-r from-green-300 to-yellow-200 text-transparent bg-clip-text">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-wide bg-gradient-to-r from-green-300 to-yellow-200 text-transparent bg-clip-text">
             Account Center
           </h1>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={handleSignOut}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition text-sm"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition text-sm"
             >
               <FaSignOutAlt /> Logout
             </button>
 
             <button
               onClick={handleDeleteAccount}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-400/30 text-red-200 rounded-full hover:bg-red-500/40 transition text-sm"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 border border-red-400/30 text-red-200 rounded-full hover:bg-red-500/40 transition text-sm"
             >
               <FaTrash /> Delete
             </button>
@@ -119,13 +119,12 @@ export default function ProfilePage() {
         <div className="w-full flex flex-col lg:flex-row gap-8">
 
           {/* LEFT — PROFILE CARD */}
-          <div className="relative lg:w-1/3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-xl p-8 flex flex-col items-center">
+          <div className="relative lg:w-1/3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-xl p-6 sm:p-8 flex flex-col items-center">
 
             <div className="relative">
-              {/* glowing aura */}
               <div className="absolute inset-0 bg-green-400/40 blur-2xl rounded-full animate-pulse"></div>
 
-              <div className="relative w-40 h-40 rounded-full overflow-hidden ring-4 ring-green-300/50 shadow-2xl">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden ring-4 ring-green-300/50 shadow-2xl">
                 <img
                   src={currentUser.profilePicture}
                   alt="Profile"
@@ -134,11 +133,11 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <h2 className="text-2xl font-bold mt-5 flex gap-2 items-center">
+            <h2 className="text-xl sm:text-2xl font-bold mt-5 flex gap-2 items-center text-center">
               <FaUser /> {currentUser.username}
             </h2>
 
-            <p className="mt-1 text-green-200/70 flex gap-2 items-center">
+            <p className="mt-1 text-green-200/70 flex gap-2 items-center text-sm sm:text-base break-all text-center">
               <FaEnvelope /> {currentUser.email}
             </p>
 
@@ -148,7 +147,7 @@ export default function ProfilePage() {
                 onClick={handleSignOut}
                 className="p-3 bg-green-500/40 hover:bg-green-500/60 rounded-xl shadow-md"
               >
-                <FaSignOutAlt className="text-xl" />
+                <FaSignOutAlt className="text-lg sm:text-xl" />
               </button>
             </div>
 
@@ -157,22 +156,20 @@ export default function ProfilePage() {
                 onClick={handleDeleteAccount}
                 className="p-3 bg-red-500/40 hover:bg-red-500/60 rounded-xl shadow-md"
               >
-                <FaTrash className="text-xl" />
+                <FaTrash className="text-lg sm:text-xl" />
               </button>
             </div>
-
           </div>
 
-
           {/* RIGHT — FORM PANEL */}
-          <div className="lg:w-2/3 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 shadow-xl p-10">
+          <div className="lg:w-2/3 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 shadow-xl p-6 sm:p-10">
 
             <div className="flex items-center gap-3 mb-8">
-              <MdEdit className="text-green-300 text-3xl" />
-              <h2 className="text-3xl font-bold">Edit Profile</h2>
+              <MdEdit className="text-green-300 text-2xl sm:text-3xl" />
+              <h2 className="text-2xl sm:text-3xl font-bold">Edit Profile</h2>
             </div>
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-8">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 sm:gap-8">
 
               {/* NAME */}
               <div className="relative">
@@ -181,7 +178,7 @@ export default function ProfilePage() {
                   id="username"
                   defaultValue={currentUser.username}
                   onChange={handleChange}
-                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-4 text-white focus:ring-2 focus:ring-green-300 focus:border-green-300 placeholder-white/40 transition"
+                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-3 sm:py-4 text-white focus:ring-2 focus:ring-green-300 placeholder-white/40 transition"
                   placeholder="Full Name"
                 />
               </div>
@@ -193,7 +190,7 @@ export default function ProfilePage() {
                   id="email"
                   defaultValue={currentUser.email}
                   onChange={handleChange}
-                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-4 text-white focus:ring-2 focus:ring-green-300 placeholder-white/40 transition"
+                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-3 sm:py-4 text-white focus:ring-2 focus:ring-green-300 placeholder-white/40 transition"
                   placeholder="Email"
                 />
               </div>
@@ -206,15 +203,14 @@ export default function ProfilePage() {
                   type="password"
                   defaultValue={currentUser.password}
                   onChange={handleChange}
-                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-4 text-white focus:ring-2 focus:ring-green-300 placeholder-white/40 transition"
+                  className="w-full bg-[#00251c]/60 border border-green-400/20 rounded-xl px-12 py-3 sm:py-4 text-white focus:ring-2 focus:ring-green-300 placeholder-white/40 transition"
                   placeholder="New Password"
                 />
               </div>
 
-
               <button
                 type="submit"
-                className="mt-4 w-full rounded-xl bg-gradient-to-r from-green-400 to-green-600 py-4 font-bold shadow-lg hover:shadow-green-500/50 hover:scale-[1.03] transition-all"
+                className="mt-4 w-full rounded-xl bg-gradient-to-r from-green-400 to-green-600 py-3 sm:py-4 font-bold shadow-lg hover:shadow-green-500/50 hover:scale-[1.03] transition-all"
               >
                 {loading ? "Updating..." : "Save Changes"}
               </button>
@@ -227,7 +223,8 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-    
+
+
 
 
 
