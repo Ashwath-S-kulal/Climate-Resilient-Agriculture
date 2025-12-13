@@ -26,12 +26,13 @@ export default function AccessPage() {
             Login to access these feature
           </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+          <div className="mt-6 flex flex-row gap-6 justify-center md:justify-start">
             <NavLink to={"/signin"}>
               <button className="px-6 py-3 rounded-xl text-lg bg-green-500 hover:bg-green-600 text-white transition">
                 Sign In
               </button>
             </NavLink>
+
             <NavLink to={"/signup"}>
               <button className="px-6 py-3 rounded-xl text-lg border border-green-400 text-green-400 hover:bg-green-400 hover:text-gray-900 transition">
                 Sign Up
