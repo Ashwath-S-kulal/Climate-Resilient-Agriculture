@@ -231,9 +231,9 @@ export default function Disease() {
 
 
   return (
-    <div onClick={handleGlobalClick} className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 relative overflow-y-auto pt-14 ">
+    <div  className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 relative overflow-y-auto pt-14 ">
       <Header />
-      <div className={`flex-1  gap-6 flex flex-col transition-all duration-300 `}>
+      <div onClick={handleGlobalClick} className={`flex-1  gap-6 flex flex-col transition-all duration-300 `}>
         <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white py-9 px-6 shadow-lg rounded-b-3xl">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-2xl md:text-4xl font-extrabold mb-4 tracking-tight">
