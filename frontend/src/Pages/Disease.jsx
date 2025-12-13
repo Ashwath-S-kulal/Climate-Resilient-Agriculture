@@ -102,10 +102,27 @@ export default function Disease() {
   const [uploadedImageFile, setUploadedImageFile] = useState(null);
   const [capturedImageFile, setCapturedImageFile] = useState(null);
   const { currentUser } = useSelector(state => state.user);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const handleClick = () => {
-    alert("Not supported");
+  const handleGlobalClick = (e) => {
+    const interactiveTags = [
+      "BUTTON",
+      "INPUT",
+      "VIDEO",
+      "CANVAS",
+      "A",
+      "LABEL",
+      "IMG",
+      "SVG",
+      "PATH"
+    ];
+
+    if (interactiveTags.includes(e.target.tagName)) return;
+
+    setShowPopup(true);
   };
+
+
 
 
 
@@ -214,7 +231,7 @@ export default function Disease() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 relative overflow-y-auto pt-14 ">
+    <div onClick={handleGlobalClick} className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 relative overflow-y-auto pt-14 ">
       <Header />
       <div className={`flex-1  gap-6 flex flex-col transition-all duration-300 `}>
         <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white py-9 px-6 shadow-lg rounded-b-3xl">
@@ -229,7 +246,6 @@ export default function Disease() {
         </div>
 
         <form
-          onClick={handleClick}
           onSubmit={handleSubmit}
           className=" bg-white  rounded-xl border border-gray-200 space-y-6 mx-8 pb-0 my-0"
         >
@@ -542,6 +558,33 @@ export default function Disease() {
       </div>
 
       <ChatbotIcon />
+      {showPopup && (
+        <div
+          className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-sm text-center animate-scaleIn"
+          >
+            <div className="text-3xl mb-2">🚧</div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">
+              Not Supported Yet
+            </h2>
+            <p className="text-gray-600 text-sm mb-5">
+              This feature is currently under development.
+            </p>
+
+            <button
+              onClick={() => setShowPopup(false)}
+              className="w-full py-2 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
