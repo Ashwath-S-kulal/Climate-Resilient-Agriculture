@@ -81,7 +81,6 @@ export default function Header() {
           </NavLink>
         </nav>
 
-        {/* User / Sign-in & Mobile Toggle */}
         <div className="flex items-center space-x-4">
           <div className="hidden md:block">
             {!currentUser ? (
@@ -158,7 +157,6 @@ export default function Header() {
             Disease Prediction
           </NavLink>
 
-          {/* User/Sign-in (Mobile) */}
           <div className="pt-4 border-t border-green-800">
             {!currentUser ? (
               <Link

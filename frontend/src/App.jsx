@@ -22,6 +22,8 @@ import DiseaseSuppliment from "./Pages/DiseaseSuppliment"
 import CropsLibrary from "./Pages/CropsLibrary"
 import Stratergies from "./Pages/ClimateResilientIdeas/Practices"
 import Adaptation from "./Pages/ClimateResilientIdeas/Adaptation"
+import AdminRoute from './Components/AdminRoute';
+import AdminDashboard from './Pages/AdminDashboard';
 
 
 export default function App() {
@@ -52,6 +54,11 @@ export default function App() {
             <Route path='/chatbot' element={<Chatbot />} />
             <Route path='/croprecomnder' element={<CropRecomnder />} />
             <Route path='/cropriskcalculater' element={<CropRiskCalculater />} />
+          </Route>
+
+
+          <Route element={<AdminRoute />}>
+            <Route path='/adminpanel' element={<AdminDashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>

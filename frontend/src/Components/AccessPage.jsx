@@ -66,7 +66,6 @@ export default function AccessPage() {
                   className="rounded-[2rem] sm:rounded-[3rem] w-full aspect-[4/5] object-cover"
                 />
 
-                {/* Floating Live Card - Adjusted for Mobile Positioning */}
                 <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[1.8rem] shadow-xl border border-slate-50 w-[180px] sm:w-[260px]">
                   <div className="flex flex-col gap-2 sm:gap-4">
                     <div className="flex items-center justify-between">
