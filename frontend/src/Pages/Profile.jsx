@@ -217,6 +217,9 @@ export default function ProfilePage() {
                 </div>
               </form>
 
+            </div>
+          </div>
+        </div>
               {error && (
                 <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-center text-sm font-medium">
                   Something went wrong. Please try again.
@@ -227,9 +230,6 @@ export default function ProfilePage() {
                   Profile updated successfully!
                 </div>
               )}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
