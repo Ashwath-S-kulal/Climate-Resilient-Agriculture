@@ -20,7 +20,7 @@ export default function AccessPage() {
     <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-slate-900 font-sans overflow-x-hidden">
       <Header />
 
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-20 md:pt-28 pb-24">
+      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-20 md:pt-24 pb-24">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 items-center">
 
           <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
@@ -58,44 +58,38 @@ export default function AccessPage() {
 
 
           <div className="lg:col-span-5 relative order-1 lg:order-2 w-full max-w-md lg:max-w-none mx-auto">
-            <div className="relative z-10 p-2 sm:p-4 bg-white rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl border border-slate-100">
-              <img
-                src="https://cdn.prod.website-files.com/637f7c161a14232e2ea8473d/68b84418387c0de1052a3238_dc1a55f6.png"
-                alt="Agriculture Tech"
-                className="rounded-[2rem] sm:rounded-[3rem] w-full aspect-[4/5] object-cover"
-              />
+            <div className="lg:col-span-5 relative order-1 lg:order-2 w-full max-w-[320px] xs:max-w-md lg:max-w-none mx-auto">
+              <div className="relative z-10 p-2 bg-white rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl border border-slate-100">
+                <img
+                  src="https://cdn.prod.website-files.com/637f7c161a14232e2ea8473d/68b84418387c0de1052a3238_dc1a55f6.png"
+                  alt="Agriculture Tech"
+                  className="rounded-[2rem] sm:rounded-[3rem] w-full aspect-[4/5] object-cover"
+                />
 
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-[1.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-slate-50 w-full max-w-[220px] sm:max-w-[260px]">
-                <div className="flex flex-col gap-4">
-
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-full bg-[#6EE731] flex items-center justify-center text-white shadow-sm">
-                      <FaChartLine className="text-xl" />
+                {/* Floating Live Card - Adjusted for Mobile Positioning */}
+                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[1.8rem] shadow-xl border border-slate-50 w-[180px] sm:w-[260px]">
+                  <div className="flex flex-col gap-2 sm:gap-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#6EE731] flex items-center justify-center text-white">
+                        <FaChartLine className="text-sm sm:text-xl" />
+                      </div>
+                      <div className="flex items-center gap-1 sm:gap-1.5 border border-slate-100 px-2 py-0.5 rounded-full">
+                        <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500"></span>
+                        </span>
+                        <span className="text-[8px] sm:text-[10px] font-bold text-emerald-600 uppercase tracking-wide">Live</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5 border border-slate-100 px-2.5 py-1 rounded-full">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wide">Live</span>
+
+                    <div>
+                      <p className="text-[10px] sm:text-sm font-bold text-slate-800">Current Users</p>
+                      <p className="text-xl sm:text-4xl font-black text-slate-900">24,800+</p>
                     </div>
-                  </div>
 
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-bold text-slate-800 tracking-tight">
-                      Current Users
-                    </p>
-                    <p className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tighter">
-                      24,800+
-                    </p>
-                  </div>
-
-
-                  <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                    <div
-                      className="bg-[#34A853] h-full rounded-full transition-all duration-700 ease-out"
-                      style={{ width: '45%' }}
-                    />
+                    <div className="w-full bg-slate-100 h-2 sm:h-3 rounded-full overflow-hidden">
+                      <div className="bg-[#34A853] h-full rounded-full w-[45%]" />
+                    </div>
                   </div>
                 </div>
               </div>
