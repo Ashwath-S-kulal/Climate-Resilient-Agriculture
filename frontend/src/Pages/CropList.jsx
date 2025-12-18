@@ -94,12 +94,7 @@ export default function CropsList() {
                 <Header />
                 <div className="pt-24 pb-16 px-4 w-full max-w-7xl mx-auto">
                     <div className="text-center">
-                        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
-                            Digital Farm Library
-                        </h1>
-                        <p className="mt-2 text-green-100 drop-shadow">
-                            Find detailed guides for your farming needs.
-                        </p>
+                       
                     </div>
                 </div>
             </div>
