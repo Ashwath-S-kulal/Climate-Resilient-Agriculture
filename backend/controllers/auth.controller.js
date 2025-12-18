@@ -25,7 +25,7 @@ export const signin = async (req, res, next) => {
     if (!validPassword) return next(errorHandler(401, "wrong credentials"));
 
     const token = jwt.sign(
-      { id: validUser._id, isAdmin: validUser.isAdmin }, 
+      { id: validUser._id, isAdmin: validUser.isAdmin },
       process.env.JWT_SECRET
     );
 
@@ -44,11 +44,11 @@ export const google = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       const token = jwt.sign(
-        { id: user._id, isAdmin: user.isAdmin }, 
+        { id: user._id, isAdmin: user.isAdmin },
         process.env.JWT_SECRET
       );
       const { password: hashedPassword, ...rest } = user._doc;
-      const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+      const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
       res
         .cookie("access_token", token, {
           httpOnly: true,
@@ -70,12 +70,12 @@ export const google = async (req, res, next) => {
         profilePicture: req.body.photo,
       });
       await newUser.save();
-      
+
       const token = jwt.sign(
-        { id: newUser._id, isAdmin: newUser.isAdmin }, 
+        { id: newUser._id, isAdmin: newUser.isAdmin },
         process.env.JWT_SECRET
       );
-      
+
       const { password: hashedPassword2, ...rest } = newUser._doc;
       const expiryDate = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 365 days
       res
