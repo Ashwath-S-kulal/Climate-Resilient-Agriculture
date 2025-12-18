@@ -77,7 +77,7 @@ export const google = async (req, res, next) => {
       );
 
       const { password: hashedPassword2, ...rest } = newUser._doc;
-      const expiryDate = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 365 days
+      const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 days
       res
         .cookie("access_token", token, {
           httpOnly: true,

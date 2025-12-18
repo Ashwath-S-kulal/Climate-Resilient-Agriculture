@@ -265,7 +265,7 @@ export default function CropRecommender() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-900 relative overflow-y-auto">
+        <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-900 relative overflow-y-auto pb-6">
             <Header />
 
             <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white pb-8 px-4 sm:px-6 shadow-lg pt-20">
