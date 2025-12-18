@@ -220,16 +220,16 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
-              {error && (
-                <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-center text-sm font-medium">
-                  Something went wrong. Please try again.
-                </div>
-              )}
-              {updateSuccess && (
-                <div className="mt-6 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl text-emerald-600 text-center text-sm font-medium">
-                  Profile updated successfully!
-                </div>
-              )}
+        {error && (
+          <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-center text-sm font-medium">
+            Something went wrong. Please try again.
+          </div>
+        )}
+        {updateSuccess && (
+          <div className="mt-6 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl text-emerald-600 text-center text-sm font-medium">
+            Profile updated successfully!
+          </div>
+        )}
       </div>
     </div>
   );

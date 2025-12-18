@@ -83,17 +83,37 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen pt-20 w-full bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-slate-900 font-sans">
       <Header />
-
       <div className="p-8 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-200 pb-8">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">Admin Dashboard</h1>
-            <p className="text-slate-500 mt-1">Manage platform access and user permissions.</p>
+        <div className="relative flex flex-col gap-6 pb-4 mb-10 border-b border-slate-200 lg:flex-row lg:items-end lg:justify-between">
+          <div className="space-y-1">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-1.5 rounded-full bg-indigo-600" />
+              <h1 className="text-xl md:text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+                Admin Dashboard
+              </h1>
+            </div>
+            <p className="max-w-md text-sm font-medium text-slate-500 sm:text-base">
+              Platform oversight, access control, and user permission management.
+            </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Accounts</p>
-              <p className="text-2xl font-bold text-indigo-600">{users.length}</p>
+
+          <div className="flex items-center gap-4 self-start rounded-2xl bg-slate-50 p-1.5 pr-6 ring-1 ring-inset ring-slate-900/5 lg:self-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+              <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                Total Accounts
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold text-slate-900">
+                  {users.length}
+                </span>
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
             </div>
           </div>
         </div>

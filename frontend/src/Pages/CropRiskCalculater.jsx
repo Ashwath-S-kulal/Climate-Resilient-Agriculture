@@ -144,6 +144,12 @@ export default function CropRiskCalculater() {
   const [showCropSug, setShowCropSug] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [showPlaceSug, setShowPlaceSug] = useState(false);
+  const [location, setLocation] = useState({
+    placeName: "",
+    latitude: null,
+    longitude: null,
+  });
+
 
   const fetchPlaceSuggestions = async (query) => {
     if (!query) {
@@ -188,21 +194,27 @@ export default function CropRiskCalculater() {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
+
         try {
           const res = await axios.get(
             `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
           );
-          setPlace(res.data.display_name || `${latitude}, ${longitude}`);
-        } catch (error) {
-          console.error(error);
-          alert("Unable to fetch location name.");
+
+          setLocation({
+            placeName: res.data.display_name,
+            latitude,
+            longitude,
+          });
+
+          setPlace(res.data.display_name);
+        } catch (err) {
+          console.error(err);
         } finally {
           setLoadingLoc(false);
         }
       },
-      (error) => {
-        console.error(error);
-        alert("Please allow location access.");
+      () => {
+        alert("Location permission denied");
         setLoadingLoc(false);
       }
     );
@@ -211,8 +223,12 @@ export default function CropRiskCalculater() {
   const submit = async (e) => {
     e.preventDefault();
     setLoadingRisk(true);
+
     try {
-      const res = await axios.post("/api/calculate/riskcalculater", { crop, place });
+      const res = await axios.post("api/calculate/riskcalculater", {
+        crop,
+        location, // ⬅️ precise lat/lon
+      });
       setResult(res.data);
     } catch (err) {
       console.error(err);
@@ -221,6 +237,7 @@ export default function CropRiskCalculater() {
       setLoadingRisk(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] flex flex-col items-center justify-start md:pb-10">
@@ -312,9 +329,15 @@ export default function CropRiskCalculater() {
                       <div
                         key={i}
                         onMouseDown={() => {
+                          setLocation({
+                            placeName: p.display_name,
+                            latitude: parseFloat(p.lat),
+                            longitude: parseFloat(p.lon),
+                          });
                           setPlace(p.display_name);
                           setShowPlaceSug(false);
                         }}
+
                         className="p-3 text-sm hover:bg-green-100 cursor-pointer"
                       >
                         {p.display_name}
