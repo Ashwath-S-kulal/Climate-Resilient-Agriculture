@@ -149,7 +149,7 @@ export default function CropsList() {
                                 <button
                                     key={season}
                                     onClick={() => setSeasonFilter(season === seasonFilter ? "" : season)}
-                                    className={`flex items-center text-sm font-semibold px-3 py-2 rounded-full transition-all duration-300 border ${
+                                    className={`flex items-center text-xs font-semibold px-3 py-2 rounded-full transition-all duration-300 border ${
                                         seasonFilter === season
                                             ? "bg-green-600 text-white border-green-600 shadow-md"
                                             : "bg-white hover:bg-lime-50 text-green-600 border-green-300"
@@ -158,13 +158,14 @@ export default function CropsList() {
                                     {season}
                                 </button>
                             ))}
-                        </div>
-                        <button
+                             <button
                             onClick={reset}
-                            className="flex items-center gap-2 bg-white hover:bg-red-50 text-green-600 border border-green-300 p-2 px-4 rounded-full shadow-md transition-colors font-medium hover:text-red-600"
+                            className="flex text-xs items-center gap-2 bg-white hover:bg-red-50 text-green-600 border border-green-300 p-2 px-4 rounded-full shadow-md transition-colors font-medium hover:text-red-600"
                         >
                             <FiRefreshCcw /> Reset
                         </button>
+                        </div>
+                       
                     </div>
                 </div>
 
