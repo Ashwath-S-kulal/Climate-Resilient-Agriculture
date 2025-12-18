@@ -39,15 +39,15 @@ export default function App() {
           <Route path='/about' element={<About />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path="/croplibrary/croplist" element={<CropsList />} />
           <Route path='/accesspage' element={<AccessPage />} />
+          <Route path='/croplibrary' element={<CropsLibrary />} />
+          <Route path="/croplibrary/croplist" element={<CropsList />} />
           <Route path='/croplibrary/cropinfo' element={<CropInfo />} />
           <Route path='/croplibrary/diseasedata' element={<DiseaseData />} />
-          <Route path='/disease/diseasesuppliment' element={<DiseaseSuppliment />} />
-          <Route path='/croplibrary' element={<CropsLibrary />} />
           <Route path='/croplibrary/stratergies' element={<Stratergies />} />
           <Route path='/croplibrary/adaptation' element={<Adaptation />} />
           <Route path='/croplibrary/tips' element={<Tips />} />
+          <Route path='/disease/diseasesuppliment' element={<DiseaseSuppliment />} />
 
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
@@ -62,6 +62,7 @@ export default function App() {
           <Route element={<AdminRoute />}>
             <Route path='/profile/adminpanel' element={<AdminDashboard />} />
           </Route>
+          
         </Routes>
       </BrowserRouter>
     </div>

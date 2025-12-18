@@ -10,6 +10,7 @@ import {
     Thermometer,
     MapPin,
     Droplets,
+    Navigation,
 } from "lucide-react";
 import ChatbotIcon from "../Components/ChatbotIcon";
 
@@ -264,6 +265,26 @@ export default function CropRecommender() {
         return 'text-red-700 bg-red-100 border-red-300';
     };
 
+
+    const handleAutoDetect = () => {
+        if (navigator.geolocation) {
+            setLoading(true);
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    fetchForLocation(pos.coords.latitude, pos.coords.longitude);
+                },
+                (err) => {
+                    setLoading(false);
+                    setError("Location access denied. Please enable location permissions.");
+                    console.warn(err);
+                }
+            );
+        } else {
+            setError("Geolocation is not supported by your browser.");
+        }
+    };
+
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-900 relative overflow-y-auto pb-6">
             <Header />
@@ -286,7 +307,7 @@ export default function CropRecommender() {
                                     placeholder="Enter area name, e.g. Ujire, India..."
                                     value={place}
                                     onChange={(e) => { setPlace(e.target.value); fetchSuggestions(e.target.value); }}
-                                    className="w-full rounded-full pl-9 pr-3 py-2 bg-gray-100 text-gray-900 placeholder-gray-500 border border-gray-300 focus:border-green-500 focus:ring-1 focus:ring-green-100 outline-none transition-all duration-300 text-sm"
+                                    className="w-full rounded-full pl-9 pr-3 py-3 bg-gray-100 text-gray-900 placeholder-gray-500 border border-gray-300 focus:border-green-500 focus:ring-1 focus:ring-green-100 outline-none transition-all duration-300 text-sm"
                                 />
                                 {suggestions.length > 0 && (
                                     <ul className="absolute flex flex-col justify-start items-start z-20 w-full bg-white text-gray-900 rounded-lg mt-1 shadow-xl max-h-48 overflow-y-auto border border-gray-300">
@@ -302,6 +323,7 @@ export default function CropRecommender() {
                                     </ul>
                                 )}
                             </div>
+
                             <button
                                 className="relative overflow-hidden bg-green-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-green-700 transition-all duration-300 font-semibold text-sm disabled:bg-gray-400 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group min-w-40"
                                 onClick={handleSubmit}
@@ -310,6 +332,18 @@ export default function CropRecommender() {
                                 <span className="absolute w-full h-full bg-white opacity-10 transition-transform duration-500 transform -translate-x-full rotate-45 group-hover:translate-x-full"></span>
                                 {loading ? (<><IconLoader className="animate-spin" size={20} /> Analyzing...</>) : isCatalogLoaded ? ("Get Recommendation") : (<><IconLoader className="animate-spin" size={20} /> Loading DB...</>)}
                             </button>
+                            <button
+                                type="button"
+                                onClick={handleAutoDetect}
+                                title="Use current location"
+                                aria-label="Auto fetch location"
+                                className="flex items-center gap-2 p-2 px-6 bg-blue-50 text-blue-600 rounded-full 
+             hover:bg-blue-100 border border-blue-200 transition-colors font-semibold"
+                            >
+                                <Navigation size={20} />
+                                <span>Auto Fetch</span>
+                            </button>
+
                         </div>
                     </div>
                 </div>

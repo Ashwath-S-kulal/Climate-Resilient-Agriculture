@@ -12,7 +12,7 @@ const images = [
 
 const quickActions = [
   {
-    to: "/croplist",
+    to: "/croplibrary/croplist",
     label: "Crops",
     icon: <FaSeedling size={22} />,
     color: "bg-green-500",
@@ -40,7 +40,7 @@ const quickActions = [
     description: "Get crop suggestions based on conditions",
   },
   {
-    to: "/cropinfo",
+    to: "/croplibrary/cropinfo",
     label: "Info",
     icon: <FaInfoCircle size={22} />,
     color: "bg-lime-500",
@@ -54,7 +54,7 @@ const quickActions = [
     description: "Calculate potential risks to your crops today",
   },
   {
-    to: "/tips",
+    to: "/croplibrary/tips",
     label: "Planner",
     icon: <FaCalendarCheck size={22} />,
     color: "bg-orange-500",
