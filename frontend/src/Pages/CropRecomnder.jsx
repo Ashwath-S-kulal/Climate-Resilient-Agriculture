@@ -289,7 +289,7 @@ export default function CropRecommender() {
                                     className="w-full rounded-full pl-9 pr-3 py-2 bg-gray-100 text-gray-900 placeholder-gray-500 border border-gray-300 focus:border-green-500 focus:ring-1 focus:ring-green-100 outline-none transition-all duration-300 text-sm"
                                 />
                                 {suggestions.length > 0 && (
-                                    <ul className="absolute z-20 w-full bg-white text-gray-900 rounded-lg mt-1 shadow-xl max-h-48 overflow-y-auto border border-gray-300">
+                                    <ul className="absolute flex flex-col items-start z-20 w-full bg-white text-gray-900 rounded-lg mt-1 shadow-xl max-h-48 overflow-y-auto border border-gray-300">
                                         {suggestions.map((s, idx) => (
                                             <li key={idx} className="p-2 cursor-pointer hover:bg-green-50 border-b border-gray-100 last:border-b-0 text-xs"
                                                 onClick={() => {
