@@ -20,16 +20,16 @@ const iconMap = {
 };
 
 const routeNameMap = {
-  "home": "Home", "profile": "Profile", "weather": "Weather",
-  "disease": "Disease", "chatbot": "Chat", "croplist": "Crops",
-  "croprecomnder": "Recommender", "cropriskcalculater": "Risk",
-  "tips": "Tips", "adaptation": "Adapt", "adminpanel": "Admin"
+  "home": "Home", "profile": "Profile", "weather": "Weather Center",
+  "disease": "Disease Prediction", "chatbot": "Chatbot", "croplist": "Crops steps",
+  "croprecomnder": "Crop Recommender", "cropriskcalculater": "Risk Analyzer",
+  "tips": "Resilient Tips", "adaptation": "Adaptation Strategies", "adminpanel": "Admin panel"
 };
 
 export default function Breadcrumbs() {
   const location = useLocation();
   const paths = location.pathname.split("/").filter(Boolean);
-  
+
   if (paths.includes("chatbot")) return null;
   if (paths.length === 0) return null;
 
