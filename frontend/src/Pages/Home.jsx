@@ -93,7 +93,7 @@ export default function Home() {
       description: "Detailed, stage-by-stage cultivation instructions optimized for your region and specific environmental conditions and soil type.",
       category: "Planning",
       color: "green-500",
-      navLink: "/croplist",
+      navLink: "/croplibrary/croplist",
     },
     {
       icon: Bug,
@@ -117,7 +117,7 @@ export default function Home() {
       description: "A comprehensive knowledge base offering insights on crop genetics, nutritional needs, best harvest practices, and market viability.",
       category: "Knowledge",
       color: "gray-500",
-      navLink: "/cropinfo",
+      navLink: "/croplibrary/cropinfo",
     },
 
   ];

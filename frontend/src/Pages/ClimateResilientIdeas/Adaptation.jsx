@@ -407,8 +407,6 @@ export default function Tips() {
                     ))}
                 </div>
             </main>
-
-            <ChatbotIcon />
         </div>
     );
 };

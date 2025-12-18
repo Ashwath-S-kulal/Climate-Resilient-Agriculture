@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Header from "../Components/Header";
 import { NavLink } from "react-router-dom";
+import ChatbotIcon from "../Components/ChatbotIcon";
 
 const recommendedBooks = [
     { title: "The Permaculture Handbook", author: "J. Russell", sourceUrl: "https://www.nazboo.com/wp-content/uploads/2017/05/ebook-The-Permaculture-Handbook.-Garden-Farming-for-Town-and-Country-by-Peter-Bane.pdf", coverPlaceholder: "https://m.media-amazon.com/images/I/71IEGjlIjWL._UF1000,1000_QL80_.jpg" },
@@ -66,125 +67,133 @@ const successfulFarmers = [
 
 
 export default function CropLibrary() {
-    const iconBaseClass = "w-10 h-10 rounded-full flex items-center justify-center mb-3 transition duration-300 ease-in-out";
-    const cardBaseClass = "bg-[#F0F0F0] rounded-xl shadow-2xl p-5 transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-lg cursor-pointer";
-    const buttonBaseClass = "text-white px-3 py-1.5 rounded-lg w-full font-medium flex items-center justify-center transition duration-300 ease-in-out";
+
+    const cardBaseClass = "group relative p-6 bg-white/80 backdrop-blur-md rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/20";
+    const iconBaseClass = "mb-4 w-12 h-12 flex items-center justify-center rounded-xl transition-transform group-hover:scale-110 group-hover:rotate-3";
+    const buttonBaseClass = "mt-auto inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-white transition-all";
 
     return (
         <div className="w-full min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 font-sans">
             <Header />
-            <div className="bg-gradient-to-t from-green-800 to-green-600 text-white py-12 pb-8 pt-24 ">
-                <div className="max-w-7xl mx-auto px-6 text-center">
-                    <h1 className="text-4xl font-extrabold mb-3 tracking-tight">
-                        Climate Resilience Agriculture <span className="text-yellow-300">Knowledge Core</span>
+            <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white pb-8 px-4 sm:px-6 shadow-lg pt-20">
+                <div className="max-w-5xl mx-auto text-center">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 sm:mb-4 tracking-tight">
+                        Climate Resilience Agriculture <span className="text-green-100">Knowledge Core</span>
                     </h1>
+                   
                 </div>
             </div>
-            <div className="bg-slate-200">
-                <section className="max-w-full py-8 sm:py-12 pb-4 px-4 sm:px-6 md:mx-auto lg:mx-10">
-                    <h2 className="text-xl sm:text-2xl font-extrabold mb-5 text-gray-900 ">
-                        Core Management Tools
-                    </h2>
+          
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200">
+                <section className="max-w-7xl mx-auto py-12 px-6 lg:px-10">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                        <div>
+                            <span className="text-green-600 font-bold tracking-widest uppercase text-xs">Essentials</span>
+                            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight pb-3">
+                                Core Management <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Tools</span>
+                            </h2>
+                            <div className="h-1 w-full bg-green-500 rounded-full hidden md:block mb-2"></div>
+                        </div>
+                    </div>
 
-                    <div className="grid grid-cols  -1 md:grid-cols-3 gap-6 sm:gap-7">
-                        <NavLink to={"/croplist"}>
-                            <div className={`${cardBaseClass} border-t-8 border-green-600 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-green-100`}>
-                                    <Leaf className="w-5 h-5 text-green-700" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <NavLink to={"/croplibrary/croplist"} className="flex">
+                            <div className={`${cardBaseClass} flex flex-col items-start overflow-hidden border-b-4 border-b-green-400`}>
+                                <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-green-50 rounded-full opacity-50" />
+                                <div className={`${iconBaseClass} bg-green-600 shadow-lg shadow-green-200`}>
+                                    <Leaf className="w-6 h-6 text-white" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Crops Growing Steps</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
+                                <h3 className="text-xl font-bold mb-2 text-gray-900">Crops Growing Steps</h3>
+                                <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                                     The Crop Steps to Grow Center provides complete, step-by-step guidance for cultivating any crop.
                                 </p>
-                                <button className={`${buttonBaseClass} bg-green-600 hover:bg-green-700`}>
-                                    Explore Guide <ArrowRight className="ml-2 w-4 h-4" />
+                                <button className={`${buttonBaseClass} bg-green-600 group-hover:pr-6`}>
+                                    Explore Guide <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
                             </div>
                         </NavLink>
 
-                        <NavLink to={"/cropinfo"}>
-                            <div className={`${cardBaseClass} border-t-8 border-green-600 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-green-100`}>
-                                    <BarChart2 className="w-5 h-5 text-green-700" />
+                        <NavLink to={"/croplibrary/cropinfo"} className="flex">
+                            <div className={`${cardBaseClass} flex flex-col items-start overflow-hidden border-b-4 border-b-emerald-400`}>
+                                <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-emerald-50 rounded-full opacity-50" />
+                                <div className={`${iconBaseClass} bg-emerald-600 shadow-lg shadow-emerald-200`}>
+                                    <BarChart2 className="w-6 h-6 text-white" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Crop Information Center</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
+                                <h3 className="text-xl font-bold mb-2 text-gray-900">Crop Information Center</h3>
+                                <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                                     The Crop Information Center helps farmers and users easily access detailed information about various crops.
                                 </p>
-                                <button className={`${buttonBaseClass} bg-green-600 hover:bg-green-700`}>
-                                    Explore Data <ArrowRight className="ml-2 w-4 h-4" />
+                                <button className={`${buttonBaseClass} bg-emerald-600 group-hover:pr-6`}>
+                                    Explore Data <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
                             </div>
                         </NavLink>
 
-                        <NavLink to={"/diseasedata"}>
-                            <div className={`${cardBaseClass} border-t-8 border-green-600 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-green-100`}>
-                                    <AlertTriangle className="w-5 h-5 text-green-700" />
+                        <NavLink to={"/croplibrary/diseasedata"} className="flex">
+                            <div className={`${cardBaseClass} flex flex-col items-start overflow-hidden border-b-4 border-b-orange-400`}>
+                                <div className={`${iconBaseClass} bg-orange-500 shadow-lg shadow-orange-200`}>
+                                    <AlertTriangle className="w-6 h-6 text-white" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Disease Data Dashboard</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
+                                <h3 className="text-xl font-bold mb-2 text-gray-900">Disease Data Dashboard</h3>
+                                <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                                     This tool is designed to offer fast guidance and support so users can make informed decisions about their health.
                                 </p>
-                                <button className={`${buttonBaseClass} bg-green-600 hover:bg-green-700`}>
-                                    Monitor Alerts <ArrowRight className="ml-2 w-4 h-4" />
+                                <button className={`${buttonBaseClass} bg-orange-600 group-hover:pr-6`}>
+                                    Monitor Alerts <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
                             </div>
                         </NavLink>
+
                     </div>
                 </section>
+                <section className="max-w-7xl mx-auto py-16 px-6 lg:px-10 border-t border-slate-300/50">
+                    <div className="flex flex-col items-center mb-12 text-center">
+                        <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-3">
+                            Business & Sustainability Hub
+                        </h2>
+                        <p className="text-slate-500 max-w-lg">Scale your operations with future-proof strategies and eco-friendly methodologies.</p>
+                    </div>
 
-                <hr className="max-w-screen mx-auto border-gray-300" />
-                <section className="max-w-full px-4 sm:px-6 py-8 sm:py-12 md:mx-auto lg:mx-10">
-                    <h2 className="text-xl sm:text-2xl font-extrabold mb-5 text-gray-900">
-                        Business & Sustainability Hub
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 lg:gap-16">
-                        <NavLink to={"/tips"}>
-                            <div className={`${cardBaseClass} border-t-8 border-blue-500 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-blue-100`}>
-                                    <HelpCircle className="w-5 h-5 text-blue-600" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <NavLink to={"/croplibrary/tips"}>
+                            <div className="group flex items-start gap-4 p-4 rounded-2xl hover:bg-blue-50 transition-colors">
+                                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform">
+                                    <HelpCircle className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Resilient Tips & Tricks</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
-                                    Simple tools and smart techniques can greatly improve your resilience and efficiency.
-                                </p>
-                                <button className={`${buttonBaseClass} bg-blue-600 hover:bg-blue-700`}>
-                                    Get Tips <ArrowRight className="ml-2 w-4 h-4" />
-                                </button>
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600">Resilient Tips & Tricks</h3>
+                                    <p className="text-sm text-gray-500 mt-1 mb-2">Simple tools and smart techniques can greatly improve your resilience.</p>
+                                    <span className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center">Get Tips <ArrowRight className="ml-1 w-3 h-3" /></span>
+                                </div>
                             </div>
                         </NavLink>
 
-                        <NavLink to={"/stratergies"}>
-                            <div className={`${cardBaseClass} border-t-8 border-blue-600 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-blue-100`}>
-                                    <Lightbulb className="w-5 h-5 text-blue-700" />
+                        <NavLink to={"/croplibrary/stratergies"}>
+                            <div className="group flex items-start gap-4 p-4 rounded-2xl hover:bg-blue-50 transition-colors">
+                                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform">
+                                    <Lightbulb className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Sustainable Practices</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
-                                    Sustainable farming practices help protect the environment while improving crop productivity.
-                                </p>
-                                <button className={`${buttonBaseClass} bg-blue-600 hover:bg-blue-700`}>
-                                    View Methods <ArrowRight className="ml-2 w-4 h-4" />
-                                </button>
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600">Sustainable Practices</h3>
+                                    <p className="text-sm text-gray-500 mt-1 mb-2">Protect the environment while improving crop productivity.</p>
+                                    <span className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center">View Methods <ArrowRight className="ml-1 w-3 h-3" /></span>
+                                </div>
                             </div>
                         </NavLink>
 
-                        <NavLink to={"/adaptation"}>
-                            <div className={`${cardBaseClass} border-t-8 border-blue-600 shadow-xl sm:shadow-2xl`}>
-                                <div className={`${iconBaseClass} bg-blue-100`}>
-                                    <Clock className="w-5 h-5 text-blue-700" />
+                        <NavLink to={"/croplibrary/adaptation"}>
+                            <div className="group flex items-start gap-4 p-4 rounded-2xl hover:bg-blue-50 transition-colors">
+                                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform">
+                                    <Clock className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 text-gray-900">Adaptation Strategies</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 mb-4">
-                                    Adaptation strategies help farmers adjust to changing climate conditions and reduce risks.
-                                </p>
-                                <button className={`${buttonBaseClass} bg-blue-600 hover:bg-blue-700`}>
-                                    Start Planning <ArrowRight className="ml-2 w-4 h-4" />
-                                </button>
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600">Adaptation Strategies</h3>
+                                    <p className="text-sm text-gray-500 mt-1 mb-2">Adjust to changing climate conditions and reduce risks.</p>
+                                    <span className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center">Start Planning <ArrowRight className="ml-1 w-3 h-3" /></span>
+                                </div>
                             </div>
                         </NavLink>
+
                     </div>
                 </section>
             </div>
@@ -269,6 +278,8 @@ export default function CropLibrary() {
                     ))}
                 </div>
             </section>
+                        <ChatbotIcon />
+            
         </div>
     );
 }

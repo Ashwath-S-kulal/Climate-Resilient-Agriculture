@@ -299,7 +299,6 @@ const formatKeyName = (key) => {
           </div>
         )}
       </main>
-      <ChatbotIcon />
     </div>
   );
 }

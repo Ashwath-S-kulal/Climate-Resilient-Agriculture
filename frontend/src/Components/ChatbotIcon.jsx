@@ -13,7 +13,7 @@ export default function ChatbotIcon() {
   return (
     <NavLink to={link}>
       <div
-        className="fixed bottom-6 right-6 z-50 flex items-center space-x-4"
+        className="fixed bottom-2 right-3 z-50 flex items-center space-x-4"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -28,9 +28,9 @@ export default function ChatbotIcon() {
         </div>
 
         <button
-          className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-xl border-4 border-green-400 transition-all duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl relative"
+          className="bg-green-600 hover:bg-green-700 text-white p-3 md:p-4 rounded-full shadow-xl border-2 border-green-400 transition-all duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl relative"
         >
-          <FaRobot size={34} />
+          <FaRobot className="w-6 h-6 md:w-9 md:h-9" />
           <span className="absolute top-0 left-0 w-full h-full rounded-full bg-green-400 opacity-30 animate-ping"></span>
         </button>
       </div>

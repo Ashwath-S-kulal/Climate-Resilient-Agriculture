@@ -100,7 +100,7 @@ export default function ProfilePage() {
 
           <div className="flex items-center gap-3">
             {currentUser?.isAdmin && (
-              <NavLink to="/adminpanel">
+              <NavLink to="/profile/adminpanel">
                 <button className="flex items-center gap-2 px-5 py-2.5 bg-amber-50 border border-amber-200 text-amber-700 rounded-xl hover:bg-amber-100 transition shadow-sm font-semibold text-sm">
                   <ShieldCheck size={18} /> Admin panel
                 </button>

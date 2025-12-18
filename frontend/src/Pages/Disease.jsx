@@ -438,7 +438,7 @@ export default function Disease() {
             Quick Navigation
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <NavLink to={"/diseasedata"} className="block transform hover:scale-[1.02] transition-transform duration-300">
+            <NavLink to={"/croplibrary/diseasedata"} className="block transform hover:scale-[1.02] transition-transform duration-300">
               <div className="bg-gray-50 p-6 rounded-2xl border-2 border-green-300 shadow-xl hover:shadow-green-400/50 transition-shadow duration-300 h-full flex flex-col cursor-pointer">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="bg-green-500 p-3 rounded-full shadow-md">
@@ -456,7 +456,7 @@ export default function Disease() {
               </div>
             </NavLink>
 
-            <NavLink to={"/diseasesuppliment"} className="block transform hover:scale-[1.02] transition-transform duration-300">
+            <NavLink to={"/disease/diseasesuppliment"} className="block transform hover:scale-[1.02] transition-transform duration-300">
               <div className="bg-gray-50 p-6 rounded-2xl border-2 border-green-300 shadow-xl hover:shadow-green-400/50 transition-shadow duration-300 h-full flex flex-col cursor-pointer">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="bg-green-500 p-3 rounded-full shadow-md">
