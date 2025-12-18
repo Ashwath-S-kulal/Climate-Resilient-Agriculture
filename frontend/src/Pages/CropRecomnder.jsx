@@ -337,11 +337,11 @@ export default function CropRecommender() {
                                 onClick={handleAutoDetect}
                                 title="Use current location"
                                 aria-label="Auto fetch location"
-                                className="flex items-center gap-2 p-2 px-6 bg-blue-50 text-blue-600 rounded-full 
-             hover:bg-blue-100 border border-blue-200 transition-colors font-semibold"
-                            >
-                                <Navigation size={20} />
-                                <span>Auto Fetch</span>
+                                disabled={loading || !isCatalogLoaded}
+                                className=" gap-2 p-2 px-6 bg-blue-50 text-blue-600 rounded-full 
+                              hover:bg-blue-100 border border-blue-200 transition-colors text-sm font-semibold disabled:bg-gray-400 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center">
+                                {loading ? (<><IconLoader className="animate-spin" size={20} /> Analyzing...</>) : isCatalogLoaded ? <><Navigation size={16} />Auto fetch</> : (<><IconLoader className="animate-spin" size={20} /> Loading DB...</>)}
+
                             </button>
 
                         </div>
