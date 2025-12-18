@@ -233,29 +233,26 @@ export default function Disease() {
   return (
     <div  className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-800 relative overflow-y-auto pt-14 ">
       <Header />
-      <div onClick={handleGlobalClick} className={`flex-1  gap-6 flex flex-col transition-all duration-300 `}>
-        <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white py-9 px-6 shadow-lg rounded-b-3xl">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-2xl md:text-4xl font-extrabold mb-4 tracking-tight">
-              Plant Disease Detection
-            </h1>
-            <p className="text-green-50 text-xs md:text-md max-w-2xl mx-auto">
-              Upload or capture a leaf image to analyze its health condition.
-            </p>
-          </div>
+      <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white pb-8 px-4 sm:px-6 shadow-lg pt-6 md:pt-11 mb-3">
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 sm:mb-4 tracking-tight">
+             Plant Disease <span className="text-green-100">Detection Tool</span>
+          </h1>
+          <p className="text-green-50 text-sm max-w-2xl mx-auto px-2">
+            Upload or capture a leaf image to analyze its health condition.
+          </p>
         </div>
-
+      </div>
+      
+      <div onClick={handleGlobalClick} className={`flex-1  gap-6 flex flex-col transition-all duration-300 `}>
         <form
           onSubmit={handleSubmit}
-          className=" bg-white  rounded-xl border border-gray-200 space-y-6 mx-8 pb-0 my-0"
+          className=" bg-white  rounded-xl border border-gray-200 space-y-6 mx-3 md:mx-8 pb-0 my-0"
         >
           <div className="bg-emerald-600 rounded-t-xl p-4 flex flex-col items-center">
             <h2 className="text-xl font-bold text-white">
-              Plant Disease Detection
+              Upload or Capture Leaf Image
             </h2>
-            <p className="text-emerald-100/90 text-sm">
-              Upload or capture a leaf image to analyze its health condition
-            </p>
           </div>
 
           <div className="p-4 space-y-6">
@@ -436,7 +433,7 @@ export default function Disease() {
             )}
           </div>
         </form>
-        <div className=" mt-4 p-6 m-8 bg-white rounded-xl shadow-2xl border border-gray-100">
+        <div className=" mt-4 p-3 md:p-6 m-3 md:m-8 bg-white rounded-xl shadow-2xl border border-gray-100">
           <h3 className="text-xl font-extrabold text-green-700 mb-4 border-b-4 border-green-500 pb-2 inline-block">
             Quick Navigation
           </h3>

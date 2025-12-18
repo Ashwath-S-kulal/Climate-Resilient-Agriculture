@@ -66,7 +66,7 @@ export default function Weather() {
 
   // --- Current Location ---
   const getCurrentLocation = () => {
-    setLoading(true); 
+    setLoading(true);
     if (!navigator.geolocation) {
       setError("Geolocation not supported");
       setLoading(false); setLocationName("Please search for a city.");
@@ -168,58 +168,56 @@ export default function Weather() {
       const arr = data.daily.time.map((t, i) => ({ date: t, temp_max: data.daily.temperature_2m_max[i], temp_min: data.daily.temperature_2m_min[i], rain: data.daily.precipitation_sum[i], wind: data.daily.wind_speed_10m_max[i], weather_code: data.daily.weather_code[i] }));
       setHistory(arr.reverse());
     } catch (e) { console.log("Failed to fetch history.", e); }
-    finally {setLoading(false); }
+    finally { setLoading(false); }
   };
 
   const todayDate = today ? new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : null;
 
   return (
     <div className="min-h-screen bg-[#95d5b2] text-gray-800 font-sans">
-      <div className="bg-gradient-to-t from-green-800 to-green-600 text-white shadow-lg pb-1 md:pb-6 pt-16 md:pt-24 sm:pt-24 md:rounded-b-3xl">
-        <Header className="bg-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <header className="mb-8">
-            <h1 className="text-4xl font-extrabold tracking-wide mb-2 justify-self-center">
-              Live Weather Forecast
-            </h1>
-            <p className="text-green-200 text-xs md:text-base justify-self-center ">
-              Stay informed with reliable weather updates designed to support smarter field management and farm planning.
-            </p>
+      <Header className="bg-transparent" />
 
-            <div className="relative mt-6 w-full">
-              <div className="flex gap-2 bg-white rounded-full shadow-xl px-4 py-2 items-center w-full">
-                <FiSearch className="text-green-500 text-lg pointer-events-none" />
-                <input
-                  type="text"
-                  placeholder="Search Farm, Town or Region..."
-                  className="flex-grow px-2 py-2 bg-transparent text-gray-800 placeholder-gray-500 focus:ring-0 outline-none text-base"
-                  value={city}
-                  onChange={(e) => fetchSuggestions(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && searchCity()}
-                />
-                <button
-                  onClick={() => searchCity()}
-                  className="px-5 py-2 bg-lime-400 hover:bg-lime-300 rounded-full transition-all text-green-900 font-semibold"
-                >
-                  <FiSearch className="w-5 h-5" />
-                </button>
-              </div>
-
-              {suggestions.length > 0 && (
-                <ul className="absolute z-50 w-full mt-1 bg-white border border-green-200 rounded-md shadow-lg max-h-60 overflow-auto">
-                  {suggestions.map((s, i) => (
-                    <li
-                      key={i}
-                      onClick={() => searchCity(s.name)}
-                      className="px-4 py-2 hover:bg-green-100 cursor-pointer text-gray-800"
-                    >
-                      {s.name}
-                    </li>
-                  ))}
-                </ul>
-              )}
+      <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white pb-8 px-4 sm:px-6 shadow-lg pt-20">
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 sm:mb-4 tracking-tight">
+            Live Weather <span className="text-green-100">Forecast Tool</span>
+          </h1>
+          <p className="text-green-50 text-sm max-w-2xl mx-auto px-2">
+            Reliable weather updates for smarter field management.
+          </p>
+          <div className="relative mt-6 w-full">
+            <div className="flex gap-2 bg-white rounded-full shadow-xl px-4 py-2 items-center w-full">
+              <FiSearch className="text-green-500 text-lg pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search Farm, Town or Region..."
+                className="flex-grow px-2 py-2 bg-transparent text-gray-800 placeholder-gray-500 focus:ring-0 outline-none text-base"
+                value={city}
+                onChange={(e) => fetchSuggestions(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && searchCity()}
+              />
+              <button
+                onClick={() => searchCity()}
+                className="px-5 py-2 bg-lime-400 hover:bg-lime-300 rounded-full transition-all text-green-900 font-semibold"
+              >
+                <FiSearch className="w-5 h-5" />
+              </button>
             </div>
-          </header>
+
+            {suggestions.length > 0 && (
+              <ul className="absolute z-50 w-full mt-1 bg-white border border-green-200 rounded-md shadow-lg max-h-60 overflow-auto">
+                {suggestions.map((s, i) => (
+                  <li
+                    key={i}
+                    onClick={() => searchCity(s.name)}
+                    className="px-4 py-2 hover:bg-green-100 cursor-pointer text-gray-800"
+                  >
+                    {s.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
 

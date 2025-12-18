@@ -268,13 +268,13 @@ export default function CropRecommender() {
         <div className="min-h-screen bg-gradient-to-b from-[#d8f3dc] via-[#b7e4c7] to-[#95d5b2] text-gray-900 relative overflow-y-auto">
             <Header />
 
-            <div className="bg-gradient-to-t from-green-800 to-green-600 text-white px-4 sm:px-8 lg:px-16 pt-24 pb-8 md:rounded-b-3xl">
-                <div className="max-w-6xl mx-auto">
-                    <h1 className="text-4xl font-extrabold text-white mb-2 flex items-center gap-2 justify-self-center">
-                        <span> Smart Crop Recommender</span>
+            <div className="w-full bg-gradient-to-t from-green-800 to-green-600 text-white pb-8 px-4 sm:px-6 shadow-lg pt-20">
+                <div className="max-w-5xl mx-auto text-center">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 sm:mb-4 tracking-tight">
+                        Smart Crop <span className="text-green-100">Recommender Tool</span>
                     </h1>
-                    <p className="text-white mb-0 text-xs md:text-base mx-5 md:justify-self-center pb-3 md:pb-10">
-                        Harnessing location-specific climate data for optimized agricultural planning.
+                    <p className="text-green-50 text-sm max-w-2xl mx-auto px-2 pb-7">
+                        Harvessing location-specific climate data for optimized agricultural planning.
                     </p>
 
                     <div className="bg-white p-4 rounded-xl md:rounded-full shadow-lg border border-gray-200">
@@ -313,8 +313,9 @@ export default function CropRecommender() {
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
 
             <main className="w-full max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-0">
                 {(loading || !isCatalogLoaded) && (
