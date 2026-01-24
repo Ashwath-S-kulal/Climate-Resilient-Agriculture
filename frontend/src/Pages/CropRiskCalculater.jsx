@@ -429,7 +429,6 @@ export default function CropRiskCalculater() {
         </div>
       </div>
 
-      <ChatbotIcon />
     </div>
   );
 }
