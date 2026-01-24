@@ -225,14 +225,14 @@ export default function CropRiskCalculater() {
     setLoadingRisk(true);
 
     try {
-      const res = await axios.post("https://climate-resilient-agriculture.onrender.com/api/calculate/riskcalculater", {
+      const res = await axios.post("/api/calculate/riskcalculater", {
         crop,
         location, // ⬅️ precise lat/lon
       });
       setResult(res.data);
     } catch (err) {
       console.error(err);
-      alert("Error calculating risk.");
+      alert("Error calculating risk.", err.response?.data?.error || "");
     } finally {
       setLoadingRisk(false);
     }
