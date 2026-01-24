@@ -232,7 +232,7 @@ export default function CropRiskCalculater() {
       setResult(res.data);
     } catch (err) {
       console.error(err);
-      alert("Error calculating risk.", err.response?.data?.error || "");
+      alert("Network Error.", err.response?.data?.error || "");
     } finally {
       setLoadingRisk(false);
     }
