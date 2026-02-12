@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  /* Prevents the browser from handling touch gestures for zooming */
+  touch-action: pan-x pan-y;
+  /* Standard way to prevent text resizing on orientation change */
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+a {
+  /* Ensures buttons don't zoom in when tapped rapidly */
+  touch-action: manipulation;
+}
