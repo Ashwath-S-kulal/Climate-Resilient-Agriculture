@@ -36,10 +36,10 @@ export default function ProfilePage() {
     try {
       dispatch(updateUserStart());
 
-      const accessToken = localStorage.getItem("accessToken"); 
+      const token = localStorage.getItem("token"); 
 
 // DEBUG: Check if the token actually exists before sending
-if (!accessToken) {
+if (!token) {
   console.error("No token found in localStorage!");
 }
 
@@ -50,7 +50,7 @@ const res = await fetch(
     headers: {
       "Content-Type": "application/json",
       // Ensure there are no extra spaces or quotes in the string
-      "Authorization": `Bearer ${accessToken}`, 
+      "Authorization": `Bearer ${token}`, 
     },
     // Adding this ensures that IF the backend tries to set a cookie, 
     // the browser is allowed to receive it.
