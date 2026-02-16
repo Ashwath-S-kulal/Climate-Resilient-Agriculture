@@ -1,17 +1,17 @@
-import jwt from 'jsonwebtoken';
-import { errorHandler } from './error.js';
+import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
   let token = null;
 
-  // 1️⃣ Check cookie
+  // 1️⃣ From cookie
   if (req.cookies?.access_token) {
     token = req.cookies.access_token;
   }
 
-  // 2️⃣ Check Authorization header
+  // 2️⃣ From Authorization header
   if (!token && req.headers.authorization) {
     const authHeader = req.headers.authorization;
+
     if (authHeader.startsWith("Bearer ")) {
       token = authHeader.split(" ")[1];
     }
@@ -25,18 +25,16 @@ export const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: "Token is not valid!" });
     }
+
     req.user = user;
     next();
   });
 };
 
-
 export const verifyAdmin = (req, res, next) => {
-    const authorizedEmail = "ashwathkulal2004@gmail.com"; 
-
-    if (req.user && (req.user.isAdmin || req.user.email === authorizedEmail)) {
-        next();
-    } else {
-        return next(errorHandler(403, 'Access denied! This panel is for authorized admins only.'));
-    }
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    return res.status(403).json({ message: "Admin access only" });
+  }
 };
