@@ -36,20 +36,28 @@ export default function ProfilePage() {
     try {
       dispatch(updateUserStart());
 
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = localStorage.getItem("accessToken"); 
 
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+// DEBUG: Check if the token actually exists before sending
+if (!accessToken) {
+  console.error("No token found in localStorage!");
+}
 
+const res = await fetch(
+  `${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // Ensure there are no extra spaces or quotes in the string
+      "Authorization": `Bearer ${accessToken}`, 
+    },
+    // Adding this ensures that IF the backend tries to set a cookie, 
+    // the browser is allowed to receive it.
+    credentials: 'include', 
+    body: JSON.stringify(formData),
+  }
+);
       const data = await res.json();
 
       if (!res.ok) {
