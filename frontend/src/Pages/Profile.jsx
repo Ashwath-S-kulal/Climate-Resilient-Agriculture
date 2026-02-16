@@ -35,36 +35,18 @@ export default function ProfilePage() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-
-      const token = localStorage.getItem("token"); 
-
-// DEBUG: Check if the token actually exists before sending
-if (!token) {
-  console.error("No token found in localStorage!");
-}
-
-const res = await fetch(
-  `${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // Ensure there are no extra spaces or quotes in the string
-      "Authorization": `Bearer ${token}`, 
-    },
-    // Adding this ensures that IF the backend tries to set a cookie, 
-    // the browser is allowed to receive it.
-    credentials: 'include', 
-    body: JSON.stringify(formData),
-  }
-);
+      const res = await fetch(`${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
-
-      if (!res.ok) {
+      if (data.success === false) {
         dispatch(updateUserFailure(data));
         return;
       }
-
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
@@ -72,22 +54,12 @@ const res = await fetch(
     }
   };
 
-
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const token = localStorage.getItem("token");
-
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URI}/api/user/delete/${currentUser._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
+      const res = await fetch(`${import.meta.env.VITE_BASE_URI}/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data));

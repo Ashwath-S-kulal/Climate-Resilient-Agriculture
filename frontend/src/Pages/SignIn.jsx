@@ -23,41 +23,31 @@ export default function SigninForm() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    dispatch(signInStart());
-
-    const res = await fetch(
-      `${import.meta.env.VITE_BASE_URI}/api/auth/signin`,
-      {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(signInStart());
+      const res = await fetch(`${import.meta.env.VITE_BASE_URI}/api/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(signInFailure(data));
+        return;
       }
-    );
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      dispatch(signInFailure(data.message));
-      return;
+      dispatch(signInSuccess(data));
+      navigate("/");
+    } catch (error) {
+      dispatch(signInFailure(error));
+      alert("Invalid Credential. Please try again.");
     }
-
-    // ✅ SAVE TOKEN HERE
-    localStorage.setItem("token", data.token);
-
-    // ✅ SAVE USER TO REDUX
-    dispatch(signInSuccess(data));
-
-    navigate("/");
-  } catch (error) {
-    dispatch(signInFailure(error.message));
-  }
-};
-
+  };
 
   return (
      <div className="min-h-screen bg-gradient-to-br from-green-950 via-emerald-900 to-green-800 flex items-center justify-center px-4 pt-14">
