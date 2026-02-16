@@ -225,7 +225,7 @@ export default function CropRiskCalculater() {
     setLoadingRisk(true);
 
     try {
-      const res = await axios.post("/api/calculate/riskcalculater", {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/api/calculate/riskcalculater`, {
         crop,
         location, // ⬅️ precise lat/lon
       });

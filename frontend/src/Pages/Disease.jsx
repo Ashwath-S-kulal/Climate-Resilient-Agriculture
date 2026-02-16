@@ -129,7 +129,7 @@ export default function Disease() {
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/api/predictions/getPredictions/${currentUser._id}`);
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/api/predictions/getPredictions/${currentUser._id}`);
       setHistory(res.data);
     } catch (err) {
       console.error("Error fetching history:", err);
@@ -163,7 +163,7 @@ export default function Disease() {
     const formData = new FormData();
     formData.append("image", image);
     try {
-      const res = await axios.post('/api/predictions/predict', formData, {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/api/predictions/predict`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -173,7 +173,7 @@ export default function Disease() {
         setResult({ invalid: true });
       } else {
         setResult(predictionResult);
-        await axios.post(`/api/predictions/createPrediction/${currentUser._id}`, predictionResult);
+        await axios.post(`${import.meta.env.VITE_BASE_URI}/api/predictions/createPrediction/${currentUser._id}`, predictionResult);
         fetchHistory();
       }
     } catch (err) {
