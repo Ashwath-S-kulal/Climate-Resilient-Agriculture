@@ -34,22 +34,33 @@ export default function AdminDashboard() {
   };
 
 
-  const handleDeleteUser = async (userId) => {
-    if (window.confirm("Are you sure you want to delete this user? This action cannot be undone.")) {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URI}/api/admin/deleteuser/${userId}`, {
-          method: 'DELETE',
-        });
-        const data = await res.json();
-        if (data.success) {
-          setUsers(users.filter((user) => user._id !== userId));
-        }
-      } catch (error) {
-        console.log(error)
-        console.error("Failed to delete user");
+const handleDeleteUser = async (userId) => {
+  if (!window.confirm("Are you sure you want to delete this user? This action cannot be undone.")) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      `${import.meta.env.VITE_BASE_URI}/api/admin/deleteuser/${userId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text);
     }
-  };
+
+    setUsers(users.filter((user) => user._id !== userId));
+  } catch (error) {
+    console.error("Failed to delete user:", error.message);
+  }
+};
+
 
   const handleRoleChange = async (userId, isAdmin) => {
     if (!window.confirm(`Make this user ${isAdmin ? "User" : "Admin"}?`)) return;
@@ -61,9 +72,11 @@ export default function AdminDashboard() {
         `${import.meta.env.VITE_BASE_URI}/api/admin/${userId}/role`,
         {
           method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+         headers: {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+}
+
         }
       );
 
