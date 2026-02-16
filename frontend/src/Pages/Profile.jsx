@@ -36,7 +36,7 @@ export default function ProfilePage() {
     try {
       dispatch(updateUserStart());
 
-      const token = localStorage.getItem("token");
+      const accessToken = localStorage.getItem("accessToken");
 
       const res = await fetch(
         `${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`,
@@ -44,7 +44,7 @@ export default function ProfilePage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify(formData),
         }
@@ -68,14 +68,14 @@ export default function ProfilePage() {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const token = localStorage.getItem("token");
+      const accessToken = localStorage.getItem("accessToken");
 
       const res = await fetch(
         `${import.meta.env.VITE_BASE_URI}/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
