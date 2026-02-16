@@ -105,7 +105,7 @@ app.use(
 allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']  })
 );
 app.options('*', cors());
-dv
+
 app.get("/", (req, res) => { res.send("Backend running"); });
 
 
