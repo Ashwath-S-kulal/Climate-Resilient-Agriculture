@@ -101,6 +101,8 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URI,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
   })
 );
 app.get("/", (req, res) => { res.send("Backend running"); });
