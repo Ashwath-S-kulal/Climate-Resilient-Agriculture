@@ -17,44 +17,27 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
-
   try {
     const validUser = await User.findOne({ email });
-    if (!validUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    if (!validUser) return next(errorHandler(404, "user not found"));
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!validPassword) {
-      return res.status(401).json({ message: "Wrong credentials" });
-    }
+    if (!validPassword) return next(errorHandler(401, "wrong credentials"));
 
     const token = jwt.sign(
-      {
-        id: validUser._id,
-        isAdmin: validUser.isAdmin,
-        email: validUser.email,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { id: validUser._id, isAdmin: validUser.isAdmin },
+      process.env.JWT_SECRET
     );
 
     const { password: hashedPassword, ...rest } = validUser._doc;
-
     res
-      .cookie("access_token", token, {
-        httpOnly: true,
-        secure: true, // required for Vercel (HTTPS)
-        sameSite: "none",
-      })
+      .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json({ ...rest, token }); // return token for frontend storage
+      .json(rest);
   } catch (error) {
-    console.error("SIGNIN ERROR:", error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
-
 
 export const google = async (req, res, next) => {
   try {

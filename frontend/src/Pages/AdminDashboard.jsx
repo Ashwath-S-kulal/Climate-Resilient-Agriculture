@@ -13,10 +13,10 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("token");
 
       const res = await fetch(`${import.meta.env.VITE_BASE_URI}/api/admin/getallusers`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!res.ok) {
@@ -38,14 +38,14 @@ const handleDeleteUser = async (userId) => {
   if (!window.confirm("Are you sure you want to delete this user? This action cannot be undone.")) return;
 
   try {
-    const accessToken = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("token");
 
     const res = await fetch(
       `${import.meta.env.VITE_BASE_URI}/api/admin/deleteuser/${userId}`,
       {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );

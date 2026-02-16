@@ -76,14 +76,14 @@ const res = await fetch(
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const accessToken = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("token");
 
       const res = await fetch(
         `${import.meta.env.VITE_BASE_URI}/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
