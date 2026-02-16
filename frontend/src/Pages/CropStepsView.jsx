@@ -10,7 +10,7 @@ export default function CropStepsView({ crop }) {
 
     setLoading(true);
 
-    fetch(`${import.meta.env.VITE_BASE_URI}/api/cropsteps/${crop.num}`)
+    fetch(`/api/cropsteps/${crop.num}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch crop steps");
         return res.json();

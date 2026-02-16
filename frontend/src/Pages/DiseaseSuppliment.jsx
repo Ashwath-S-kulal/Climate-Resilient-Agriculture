@@ -13,7 +13,7 @@ export default function CsvReader() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_BASE_URI}/api/supplements/supplimentdata`)
+    fetch("/api/supplements/supplimentdata")
       .then((res) => res.json())
       .then((result) => {
         setAllData(result.data);

@@ -17,7 +17,6 @@ import { FaUser, FaEnvelope, FaLock, FaSignOutAlt, FaTrash } from "react-icons/f
 import { MdEdit } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
-import axios from "axios"
 
 
 export default function ProfilePage() {
@@ -36,7 +35,7 @@ export default function ProfilePage() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ export default function ProfilePage() {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await axios.delete(`${import.meta.env.VITE_BASE_URI}/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -74,7 +73,7 @@ export default function ProfilePage() {
 
   const handleSignOut = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_BASE_URI}/api/auth/signout`);
+      await fetch('/api/auth/signout');
       dispatch(signOut())
     } catch (error) {
       console.log(error);

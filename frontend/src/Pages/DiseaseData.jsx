@@ -14,7 +14,7 @@ export default function CsvReader() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_BASE_URI}/api/cropdiseases`)
+    fetch("/api/cropdiseases")
       .then(res => res.json())
       .then(data => {
         setCsvData(data);
