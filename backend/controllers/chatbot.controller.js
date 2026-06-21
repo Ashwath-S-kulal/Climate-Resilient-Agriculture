@@ -1,35 +1,49 @@
-
-import OpenAI from "openai";
+import Groq from "groq-sdk";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export const chatbot = async (req, res) => {
   try {
-    const { message} = req.body;
-    console.log("User Message:", message);
+    console.log("Groq Key Exists:", !!process.env.GROQ_API_KEY);
+
+    const { message } = req.body;
 
     if (!message) {
-      return res.status(400).json({ error: "Message is required" });
+      return res.status(400).json({
+        error: "Message is required",
+      });
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages: [
-        { role: "system", content: "You are a helpful AI farming assistant." },
-        { role: "user", content: message },
+        {
+          role: "system",
+          content:
+            "You are an expert AI farming assistant. Help farmers with crop diseases, fertilizers, irrigation, weather impacts, pest control, and sustainable agriculture practices.",
+        },
+        {
+          role: "user",
+          content: message,
+        },
       ],
+      temperature: 0.7,
+      max_tokens: 1024,
     });
 
-    res.json({
+    return res.json({
       reply: completion.choices[0].message.content,
     });
   } catch (error) {
-    console.error(" Error in /api/ai/assistant:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("Groq Error:", error);
+
+    return res.status(500).json({
+      error: error.message,
+    });
   }
 };

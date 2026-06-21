@@ -12,6 +12,7 @@ import cropInfoRoutes from "./routes/cropInfo.route.js"
 import cropStepRoutes from "./routes/cropStep.route.js";
 import cropdiseaseRoutes from "./routes/cropdisease.route.js"
 import AdminRoutes from "./routes/admin.routes.js";
+import predictionRoutes from "./routes/prediction.route.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -38,6 +39,8 @@ app.use("/api/cropinfo", cropInfoRoutes);
 app.use("/api/cropsteps", cropStepRoutes);
 app.use("/api/cropdiseases", cropdiseaseRoutes);
 app.use("/api/admin", AdminRoutes);
+app.use("/api/predictions", predictionRoutes);
+
 
 
 
@@ -68,3 +71,4 @@ mongoose
   .connect(process.env.MONGO)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error(err));
+
